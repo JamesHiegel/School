@@ -1,5 +1,5 @@
 package io.github.jameshiegel;
 
-public class ThreeAddGenViewer {
+public class ThreeAddGenView {
 
 }
