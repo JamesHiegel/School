@@ -29,8 +29,8 @@ public class ThreeAddressGeneratorController {
 				String output = theModel.constructTree(input);
 				// pass the infix expression to the view
 				theView.setInFixExpression(output);
-
 			} catch (RuntimeException e1) {
+				//catches RunimeException errors and passed the invalid token to a pop-up windo
 				String errorMsg = e1.toString();
 				String invalidToken = errorMsg.substring(errorMsg.length() - 1, errorMsg.length());
 				theView.displayErrorMessage("Invalid token: " + invalidToken);

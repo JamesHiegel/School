@@ -15,9 +15,37 @@ public class OperatorNode extends Node {
 	OperatorNode(char value) {
 		super(value);
 	}
-	
-	@Override
-	public String toString() {
-		return "(" + this.left + " " + value + " " + this.right + ")"; 
+
+	/**
+	 * This method returns the value in the below format:
+	 * value leftvalue rightvalue
+	 * EX: + 2 1
+	 */
+	public String preOrderWalk() {
+		String leftValue = left.preOrderWalk();
+		String rightValue = right.preOrderWalk();
+		return "" + this.value + " " + leftValue + " " + rightValue;
+	}
+
+	/**
+	 * This method returns the value in the below format:
+	 * (leftvalue value rightvalue)
+	 * EX: (2 + 1)
+	 */
+	public String inOrderWalk() {
+		String leftValue = left.inOrderWalk();
+		String rightValue = right.inOrderWalk();
+		return "(" + leftValue + " " + this.value + " " + rightValue + ")";
+	}
+
+	/**
+	 * This method returns the value in the below format:
+	 * leftvalue rightvalue value
+	 * EX: 2 1 +
+	 */
+	public String postOrderWalk() {
+		String leftValue = left.postOrderWalk();
+		String rightValue = right.postOrderWalk();
+		return leftValue + " " + rightValue + " " + this.value;
 	}
 }

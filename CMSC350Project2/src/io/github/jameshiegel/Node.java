@@ -7,9 +7,9 @@ package io.github.jameshiegel;
  * classes. Node objects contain a value, a left Node and a right Node.
  */
 public abstract class Node {
-	char value;
-	Node left;
-	Node right;
+	protected char value;
+	protected Node left;
+	protected Node right;
 
 	/**
 	 * This method creates a node with a value and two child nodes.
@@ -21,7 +21,24 @@ public abstract class Node {
 		this.value = value;
 	}
 
-	public String toString() {
-		return Character.toString(value);
+	/**
+	 * This method returns the value of the node.
+	 */
+	public String preOrderWalk() {
+		return String.valueOf(value);
+	}
+
+	/**
+	 * This method returns the value of the node.
+	 */
+	public String inOrderWalk() {
+		return String.valueOf(value);
+	}
+
+	/**
+	 * This method returns the value of the node.
+	 */
+	public String postOrderWalk() {
+		return String.valueOf(value);
 	}
 }
