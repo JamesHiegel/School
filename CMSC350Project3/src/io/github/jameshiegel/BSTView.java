@@ -126,9 +126,9 @@ public class BSTView extends JFrame {
 	}
 
 	/**
-	 * This method returns the text inputted into the Original List text box.
+	 * This method returns the text inputed into the Original List text box.
 	 * 
-	 * @return the String inputted in the Original List text box
+	 * @return the String inputed in the Original List text box
 	 */
 	public String getPostFixExpression() {
 		return inputTextBox.getText();
