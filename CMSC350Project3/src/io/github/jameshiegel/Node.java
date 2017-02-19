@@ -1,10 +1,12 @@
 package io.github.jameshiegel;
 
 public class Node<E> {
+	//Instance variables
 	private E data;
 	private Node<E> left;
 	private Node<E> right;
 
+	//Constructors
 	public Node(E data) {
 		this.data = data;
 		left = null;
