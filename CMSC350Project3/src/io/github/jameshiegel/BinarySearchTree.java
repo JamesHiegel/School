@@ -3,8 +3,9 @@ package io.github.jameshiegel;
 public class BinarySearchTree {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+		BSTView theView = new BSTView();
+		theView.setVisible(true);
 	}
 
 }
