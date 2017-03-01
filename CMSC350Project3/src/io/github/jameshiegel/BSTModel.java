@@ -2,15 +2,48 @@ package io.github.jameshiegel;
 
 public class BSTModel<E extends Comparable<E>> {
 	private Node root;
+	private String output = "";
 
+	public void parseIntegerString(String input) {
+		root = null;
+		output = "";
+		String[] split = input.split("\\s+");
+		// int[] numbers = new int[input.length()];
+		// int i = 0;
+		for (String string : split) {
+			insert(string);
+			// numbers[i++] = Integer.parseInt(string);
+			// System.out.println(string);
+		}
+		// for (int c = 0 ; c < numbers.length; c++) {
+		// System.out.println(numbers[c]);
+		// }
+
+	}
+
+	public void parseFractionString(String input) {
+
+	}
+
+	/**
+	 * This method returns true or false if the Node is empty.
+	 * 
+	 */
 	class Node {
-		E data;
+		String data;
 		Node left;
 		Node right;
 
-		public Node(E data) {
-			this.data = data;
+		public Node(String data) {
+			this(data, null, null);
 		}
+		
+		public Node(String data, Node left, Node right) {
+			this.data = data;
+			this.left = left;
+			this.right = right;
+		}
+
 	}
 
 	/**
@@ -25,25 +58,26 @@ public class BSTModel<E extends Comparable<E>> {
 	/**
 	 * This method inserts a new value into the tree.
 	 * 
-	 * @param the
-	 *            value to be inputed
+	 * @param string
+	 *            item to be inputed
 	 */
-	public void insert(E value) {
+	public void insert(String string) {
 		if (isEmpty())
-			root = new Node(value);
+			root = new Node(string);
 		else
-			insert(root, value);
+			insert(root, string);
 	}
 
 	/**
-	 * This method inserts a new value to the left or right of a node in the tree.
+	 * This method inserts a new value to the left or right of a node in the
+	 * tree.
 	 * 
-	 * @param the
-	 *            node to be
-	 * @param the
-	 *            value to be inputed
+	 * @param node
+	 *            current Node
+	 * @param value
+	 *            data to be inputed
 	 */
-	private void insert(Node node, E value) {
+	private void insert(Node node, String value) {
 
 		if (value.compareTo(node.data) < 0) {
 			if (node.left == null)
@@ -57,4 +91,33 @@ public class BSTModel<E extends Comparable<E>> {
 				insert(node.right, value);
 		}
 	}
+	
+	public String ascendOrder() {
+		return ascendOrder(root);
+	}
+	
+	public String ascendOrder(Node node) {
+		if (node != null) {
+			ascendOrder(node.left);
+			output += node.data + " ";
+			System.out.println(node.data);
+			ascendOrder(node.right);
+		}
+		return output;
+	}
+	
+	public String descendOrder() {
+		return descendOrder(root);
+	}
+	
+	public String descendOrder(Node node) {
+		if (node != null) {
+			descendOrder(node.right);
+			output += node.data + " ";
+			//System.out.println(node.data);
+			descendOrder(node.left);
+		}
+		return output;
+	}
+
 }

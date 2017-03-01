@@ -130,8 +130,16 @@ public class BSTView extends JFrame {
 	 * 
 	 * @return the String inputed in the Original List text box
 	 */
-	public String getPostFixExpression() {
+	public String getOriginalList() {
 		return inputTextBox.getText();
+	}
+	
+	public boolean getSort() {
+		return ascendSort.isSelected() ==  true;
+	}
+	
+	public boolean getNumberType() {
+		return integerType.isSelected() == true;
 	}
 	
 	/**
@@ -140,7 +148,7 @@ public class BSTView extends JFrame {
 	 * @param textMessage
 	 *            the String to be put in the Sorted List text box.
 	 */
-	public void setInFixExpression(String textMessage) {
+	public void setSortedList(String textMessage) {
 		outputTextBox.setText(textMessage);
 	}
 	
