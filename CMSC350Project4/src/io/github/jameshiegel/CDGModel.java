@@ -41,15 +41,6 @@ class Vertex<T> {
 	public void setEdges(LinkedList<String> edges) {
 		this.edges = edges;
 	}
-
-	public String toString() {
-		Iterator<String> itr = edges.iterator();
-		String result = "";
-		while (itr.hasNext()) {
-			result = result + (itr.next());
-		}
-		return result;
-	}
 }
 
 public class CDGModel {
@@ -58,10 +49,10 @@ public class CDGModel {
 	private String words[];
 	private ArrayList<Vertex<String>> graph = new ArrayList<Vertex<String>>(10);
 	private boolean duplicate = false;
-	private int index = 0;
+	private int index = -1;
 	private LinkedList<String> adjList = new LinkedList<String>();
 
-	public void makeDirectedGraph(String filename) throws IOException {
+	public void makeDirectedGraph(String filename) throws IOException, InvalidClassException {
 		// checks if the filename is valid
 		Path path = Paths.get(filename);
 		if (!Files.exists(path))
@@ -75,6 +66,9 @@ public class CDGModel {
 				// breaks the line into an array of words
 				words = line.split("\\s");
 				for (int c = 0; c < words.length; c++) {
+					// checks for valid class name
+					if (!words[c].substring(0,5).equals("Class")) throw new InvalidClassException();
+					
 					// if the value does not exist in the HashMap add it
 					if (!classNames.containsValue(words[c])) {
 						classNames.put(classNames.size(), words[c]);
@@ -89,19 +83,21 @@ public class CDGModel {
 					// vertex
 					if (graph.isEmpty() || duplicate == false) {
 						graph.add(new Vertex(words[c]));
+						index++;
 					}
 					duplicate = false;
 					if (firstWord == false) {
 						adjList.add(words[c]);
 						graph.get(index).setEdges(adjList);
 					}
+					
 					firstWord = false;
 				}
 				firstWord = true;
 			}
 		}
 		for (int i = 0; i < graph.size(); i++) {
-			System.out.println(graph.get(i).getName() + " " + graph.get(i).toString());
+			System.out.println(graph.get(i).getName() + " " + graph.get(i).getEdges());
 		}
 	}
 

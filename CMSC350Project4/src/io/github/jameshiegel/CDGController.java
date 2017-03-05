@@ -22,9 +22,13 @@ public class CDGController {
 			String input = theView.getFileName();
 			try {
 				theModel.makeDirectedGraph(input);
-				//System.out.println("Hash Table:\n" + theModel.getHashMapContents());
+				// System.out.println("Hash Table:\n" +
+				// theModel.getHashMapContents());
+				theView.displayErrorMessage("Graph Built Sucessfully");
 			} catch (IOException ioe) {
-				theView.displayErrorMessage("Invalid File Name");
+				theView.displayErrorMessage("File Did Not Open");
+			} catch (InvalidClassException ice) {
+				theView.displayErrorMessage("Invalid Class in File");
 			}
 		}
 	}
