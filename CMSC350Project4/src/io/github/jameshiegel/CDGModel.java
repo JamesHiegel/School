@@ -7,7 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-
+import java.util.Iterator;
+import java.util.Map;
 
 public class CDGModel {
 	private HashMap<Integer, String> classNames = new HashMap<Integer, String>();
@@ -32,12 +33,20 @@ public class CDGModel {
 						classNames.put(classNames.size(), words[c]);
 					}
 				}
-
 			}
 		}
-
-		System.out.println(classNames);
-
 	}
 
+	public String getHashMapContents() {
+		String result = "";
+		// obtains an Set of the HashMap, then obtains an iterator from the Set
+		Iterator itr = classNames.entrySet().iterator();
+		// iterators over the collection
+		while (itr.hasNext()) {
+			Map.Entry pair = (Map.Entry) itr.next();
+			// outputs the key and value
+			result = result + (pair.getKey() + "=>" + pair.getValue() + " ");
+		}
+		return result;
+	}
 }

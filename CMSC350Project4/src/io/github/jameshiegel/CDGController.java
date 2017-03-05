@@ -24,6 +24,7 @@ public class CDGController {
 
 			try {
 				theModel.makeDirectedGraph(input);
+				theView.setRecompilationOrder(theModel.getHashMapContents());
 			} catch (IOException ioe) {
 				theView.displayErrorMessage("Invalid File Name");
 			}

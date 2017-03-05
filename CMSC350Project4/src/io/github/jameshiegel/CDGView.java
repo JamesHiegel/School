@@ -3,7 +3,7 @@ package io.github.jameshiegel;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -76,21 +76,22 @@ public class CDGView extends JFrame {
 
 		c.gridy = 1;
 		c.gridx = 2;
-		recompilationOrder.setBorder(null);
 		topPanel.add(topologicalOrderBtn, c);
 
 		// creates bottom panel
-		JPanel btmPanel = new JPanel();
+		JPanel btmPanel = new JPanel(new BorderLayout());
 		// creates border with label
 		btmPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Recompilation Order"));
 		btmPanel.setBackground(Color.WHITE); // makes background white
 		// sets bottom panel size
 		btmPanel.setPreferredSize(new Dimension(525, 160));
-		// makes output text box uneditable
+
+		recompilationOrder.setBorder(null);
+		recompilationOrder.setLineWrap(true);
 		recompilationOrder.setEditable(false);
 
 		// add components to bottom panel
-		btmPanel.add(recompilationOrder, c);
+		btmPanel.add(recompilationOrder);
 
 		// adds both panels to the master panel
 		panel.add(topPanel);
@@ -124,7 +125,7 @@ public class CDGView extends JFrame {
 	 *            the String to be put in the "Recompilation Order" text area.
 	 */
 	public void setRecompilationOrder(String textMessage) {
-		recompilationOrder.setText(textMessage);
+		recompilationOrder.append(textMessage);
 	}
 	
 	/**
