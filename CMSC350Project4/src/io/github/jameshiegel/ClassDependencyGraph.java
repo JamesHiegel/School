@@ -7,7 +7,7 @@ public class ClassDependencyGraph {
 		CDGView theView = new CDGView();
 		CDGModel theModel= new CDGModel();
 		//instantiates the Controller and passes the references to the View and Model
-		CDGController theController= new CDGController(theView, theModel);
+		CDGController theController = new CDGController(theView, theModel);
 		//shows the GUI
 		theView.setVisible(true);
 	}
