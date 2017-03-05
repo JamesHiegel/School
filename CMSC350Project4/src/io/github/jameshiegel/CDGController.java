@@ -22,7 +22,7 @@ public class CDGController {
 			String input = theView.getFileName();
 			try {
 				theModel.makeDirectedGraph(input);
-				theView.setRecompilationOrder(theModel.getHashMapContents());
+				//System.out.println("Hash Table:\n" + theModel.getHashMapContents());
 			} catch (IOException ioe) {
 				theView.displayErrorMessage("Invalid File Name");
 			}
