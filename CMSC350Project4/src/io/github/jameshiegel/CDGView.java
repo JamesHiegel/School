@@ -125,7 +125,7 @@ public class CDGView extends JFrame {
 	 *            the String to be put in the "Recompilation Order" text area.
 	 */
 	public void setRecompilationOrder(String textMessage) {
-		recompilationOrder.append(textMessage);
+		recompilationOrder.setText(textMessage);
 	}
 	
 	/**

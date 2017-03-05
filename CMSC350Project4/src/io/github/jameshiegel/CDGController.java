@@ -20,8 +20,6 @@ public class CDGController {
 		public void actionPerformed(ActionEvent e) {
 			// get the input from the view
 			String input = theView.getFileName();
-			// theView.setRecompilationOrder(input);
-
 			try {
 				theModel.makeDirectedGraph(input);
 				theView.setRecompilationOrder(theModel.getHashMapContents());

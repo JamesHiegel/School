@@ -6,15 +6,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class CDGModel {
 	private HashMap<Integer, String> classNames = new HashMap<Integer, String>();
 	private String line = null;
 	private String words[];
-
+	
+	
 	public void makeDirectedGraph(String filename) throws IOException {
 		// checks if the filename is valid
 		Path path = Paths.get(filename);
@@ -24,6 +27,7 @@ public class CDGModel {
 		// use a try with resources to release resources when no longer needed
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
 			// reads the next line until there are no more lines
+			boolean firstWord = true;
 			while ((line = bufferedReader.readLine()) != null) {
 				// breaks the line into an array of words
 				words = line.split("\\s");
@@ -32,9 +36,16 @@ public class CDGModel {
 					if (!classNames.containsValue(words[c])) {
 						classNames.put(classNames.size(), words[c]);
 					}
+					if (firstWord == true) {
+						// add a new LinkedList to the ArrayList
+					} else {
+						// add the index to the current LinkedList
+					}
 				}
-			}
-		}
+				firstWord = false;
+			} // next word
+			firstWord = true;
+		} // next line
 	}
 
 	public String getHashMapContents() {
