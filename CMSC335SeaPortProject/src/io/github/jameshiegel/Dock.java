@@ -18,4 +18,10 @@ public class Dock extends Thing {
 	public void setShip(Ship ship) {
 		this.ship = ship;
 	}
+
+	@Override
+	public String toString() {
+		return "Dock [ship=" + ship + "]";
+	}
+	
 }

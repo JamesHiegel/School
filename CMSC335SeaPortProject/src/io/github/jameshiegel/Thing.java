@@ -1,10 +1,18 @@
 package io.github.jameshiegel;
 
+/*File Name: Thing.Java
+ *Date: 27 June 2017
+ *Author: James Hiegel
+ */
+/**
+ * The Thing class 
+ */
+
 public class Thing implements Comparable<Thing> {
 	// instance variables
-	private int index = 0;
-	private String name = "";
-	private int parent = 0;
+	protected String name = "";
+	protected int index = 0;
+	protected int parent = 0;
 
 	// constructors
 	public Thing(int index, String name, int parent) {
@@ -45,6 +53,11 @@ public class Thing implements Comparable<Thing> {
 	public int compareTo(Thing arg0) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Thing [index=" + index + ", name=" + name + ", parent=" + parent + "]";
 	}
 
 }

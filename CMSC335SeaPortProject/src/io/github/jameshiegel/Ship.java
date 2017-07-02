@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Ship extends Thing {
 	// instance variables
-	private PortTime arrivalTime, dockTime;
-	private double draft, length, weight, width;
-	private ArrayList<Job> jobs = new ArrayList<Job>();
+	protected PortTime arrivalTime, dockTime;
+	protected double draft, length, weight, width;
+	protected ArrayList<Job> jobs = new ArrayList<Job>();
 
 	// constructors
 	public Ship(int index, String name, int parent, PortTime arrivalTime, PortTime dockTime, double draft,
@@ -77,4 +77,17 @@ public class Ship extends Thing {
 	public void setJobs(ArrayList<Job> jobs) {
 		this.jobs = jobs;
 	}
+
+	@Override
+	public String toString() {
+		String st = name;
+		st += "\n --- Arrival Time: " + arrivalTime;
+		st += "\n --- Dock Time: " + dockTime;
+		st += "\n --- Draft: " + draft;
+		st += "\n --- Length: " + length;
+		st += "\n --- Width: " + width;
+		st += "\n --- Weight: " + weight;
+		return st;
+	} // end method toString
+
 }

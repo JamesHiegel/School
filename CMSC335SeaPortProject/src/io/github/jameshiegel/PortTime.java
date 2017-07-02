@@ -21,4 +21,9 @@ public class PortTime {
 		this.time = time;
 	}
 
+	@Override
+	public String toString() {
+		return "PortTime [time=" + time + "]";
+	}
+
 }

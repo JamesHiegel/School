@@ -43,4 +43,18 @@ public class CargoShip extends Ship {
 		this.cargoWeight = cargoWeight;
 	}
 
+	@Override
+	public String toString() {
+		String st = "Cargo ship: " + super.toString();
+		st += "\n --- Cargo Volume: " + cargoVolume;
+		st += "\n --- Cargo Weight: " + cargoWeight;
+		st += "\n --- Cargo Value: " + cargoValue;
+		if (jobs.size() == 0)
+			return st;
+		st += "\n --- Jobs: ";
+		for (Job mj : jobs)
+			st += "\n - " + mj;
+		return st;
+	} // end method toString
+
 }

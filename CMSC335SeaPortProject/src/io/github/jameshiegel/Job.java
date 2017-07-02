@@ -32,4 +32,9 @@ public class Job extends Thing {
 		this.requirements = requirements;
 	}
 
+	@Override
+	public String toString() {
+		return "Job [duration=" + duration + ", requirements=" + requirements + "]";
+	}
+
 }

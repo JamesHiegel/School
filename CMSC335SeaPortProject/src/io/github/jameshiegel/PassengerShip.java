@@ -43,4 +43,18 @@ public class PassengerShip extends Ship {
 		this.numberOfRooms = numberOfRooms;
 	}
 
+	@Override
+	public String toString() {
+		String st = "Passenger ship: " + super.toString();
+		st += "\n --- Number of Rooms: " + numberOfRooms;
+		st += "\n --- Number of Passengers: " + numberOfPassengers;
+		st += "\n --- Number of Occupied Rooms: " + numberOfOccupiedRooms;
+		if (jobs.size() == 0)
+			return st;
+		st += "\n --- Jobs: ";
+		for (Job mj : jobs)
+			st += "\n - " + mj;
+		return st;
+	} // end method toString
+
 }

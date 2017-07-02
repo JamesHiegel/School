@@ -31,4 +31,9 @@ public class World extends Thing {
 		this.time = time;
 	}
 
+	@Override
+	public String toString() {
+		return "World [ports=" + ports + ", time=" + time + "]";
+	}
+
 }
