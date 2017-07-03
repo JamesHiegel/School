@@ -2,12 +2,17 @@ package io.github.jameshiegel;
 
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,6 +27,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 // Purpose: 
 
 public class SeaPortProgram extends JFrame {
+	private final String[] opt = { "Name", "Index", "Skill", "Length", "Width", "Draft" };
+	private JComboBox jcb = new JComboBox(opt);
 	private JTextField searchTerm = new JTextField(15);
 	private JTree jtl = new JTree();
 	private JTextArea jtam = new JTextArea(5, 20);
@@ -29,12 +36,7 @@ public class SeaPortProgram extends JFrame {
 	private FileFilter filter = new FileNameExtensionFilter("Text File", "txt");
 	private World world;
 
-	// TODO Read the data file, creating the specified internal data
-	// structure
-	// TODO Display the internal data structure in a nice format in the
-	// GUI
 	// TODO Display the results of a Search specified by the user
-	// TODO Displays pop-up with error message
 
 	public SeaPortProgram() {
 		setTitle("SeaPort Simulator");
@@ -47,9 +49,10 @@ public class SeaPortProgram extends JFrame {
 		JPanel tp = new JPanel();
 		JButton loadBtn = new JButton("Load File");
 		tp.add(loadBtn);
+		tp.add(jcb);
+		tp.add(searchTerm);
 		JButton searchBtn = new JButton("Search");
 		tp.add(searchBtn);
-		tp.add(searchTerm);
 		add(tp, BorderLayout.PAGE_START);
 
 		// left panel
@@ -75,29 +78,130 @@ public class SeaPortProgram extends JFrame {
 
 		// action listeners
 		loadBtn.addActionListener(e -> loadFile());
-		searchBtn.addActionListener(e -> search(searchTerm.getText()));
+		searchBtn.addActionListener(e -> search());
 
 	} // end SeaPortProgram constructor
 
 	public void loadFile() {
-		jtar.append("Load File button pressed\n");
 		JFileChooser fc = new JFileChooser(".");
 		fc.setFileFilter(filter);
 		int returnVal = fc.showOpenDialog(SeaPortProgram.this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
-			appendLog(String.format("%s selected\n", file));
+			appendLog(String.format("Loading %s\n", file));
 			world = new World(file);
+			appendDisplay(world.toString());
 		}
 	} // end method loadFile
 
-	public void search(String target) {
-		appendLog(String.format("Search button pressed, target: %s\n", target));
-	} // end method search
+	public void search() {
+		String opt = (String) jcb.getSelectedItem();
+		String st = searchTerm.getText();
+		st.trim();
+		appendLog(String.format("Search button pressed, type: %s, target: %s\n", opt, st));
+		jtam.setText("");
+		try {
+			switch (opt) {
+			case "Name":
+				for (SeaPort sp : world.ports) {
+					searchHelper(sp.getName(), st);
+					for (Dock dk : sp.docks) {
+						searchHelper(dk.getName(), st);
+					}
+					for (Ship sh : sp.que) {
+						searchHelper(sh.getName(), st);
+					}
+					for (Ship sh : sp.ships) {
+						searchHelper(sh.getName(), st);
+					}
+					for (Person pr : sp.persons) {
+						searchHelper(pr.getName(), st);
+					}
+				}
+				break;
+			case "Index":
+				for (SeaPort sp : world.ports) {
+					searchHelper(Integer.toString(sp.index), st);
+					for (Dock dk : sp.docks) {
+						searchHelper(Integer.toString(dk.index), st);
+					}
+					for (Ship sh : sp.que) {
+						searchHelper(Integer.toString(sh.index), st);
+					}
+					for (Ship sh : sp.ships) {
+						searchHelper(Integer.toString(sh.index), st);
+					}
+					for (Person pr : sp.persons) {
+						searchHelper(Integer.toString(pr.index), st);
+					}
+				}
+				break;
+			case "Skill":
+				for (SeaPort sp : world.ports) {
+					for (Dock dk : sp.docks) {
+						for (Person pr : sp.persons) {
+							searchHelper(pr.skill, st);
+						}
+					}
+				}
+				break;
+			case "Length":
+				for (SeaPort sp : world.ports) {
+					for (Ship sh : sp.que) {
+						searchHelper(Double.toString(sh.length), st);
+					}
+					for (Ship sh : sp.ships) {
+						searchHelper(Double.toString(sh.length), st);
+					}
+				}
+				break;
+			case "Width":
+				for (SeaPort sp : world.ports) {
+					for (Ship sh : sp.que) {
+						searchHelper(Double.toString(sh.width), st);
+					}
+					for (Ship sh : sp.ships) {
+						searchHelper(Double.toString(sh.width), st);
+					}
+				}
+				break;
+			case "Draft":
+				for (SeaPort sp : world.ports) {
+					for (Ship sh : sp.que) {
+						searchHelper(Double.toString(sh.draft), st);
+					}
+					for (Ship sh : sp.ships) {
+						searchHelper(Double.toString(sh.draft), st);
+					}
+				}
+				break;
+			} // end switch
+		} catch (
+
+		NumberFormatException e) {
+			displayErrorMessage("Invalid index!");
+		}
+	} // end
+		// method
+		// search
 
 	public void appendLog(String text) {
 		jtar.append(text);
 	} // end method appendLog
+
+	public void appendDisplay(String text) {
+		jtam.append(text);
+	} // end method appendDisplay
+
+	public void displayErrorMessage(String errorMessage) {
+		JOptionPane.showMessageDialog(this, errorMessage);
+	} // end method displayErrorMessage
+
+	public String searchHelper(String x, String y) {
+		if (x.contains(y))
+			appendDisplay(x.toString() + "\n");
+		return null;
+	}
 
 	public class Thing implements Comparable<Thing> {
 		// instance variables
@@ -118,6 +222,10 @@ public class SeaPortProgram extends JFrame {
 		public Thing() {
 		} // end default constructor
 
+		public String getName() {
+			return name;
+		}
+
 		@Override
 		public String toString() {
 			return name + " " + index;
@@ -128,6 +236,7 @@ public class SeaPortProgram extends JFrame {
 			// TODO Auto-generated method stub
 			return 0;
 		} // end method compareTo
+
 	} // end class Thing
 
 	public class World extends Thing {
@@ -137,7 +246,117 @@ public class SeaPortProgram extends JFrame {
 
 		// constructors
 		public World(File file) {
+			appendLog("World created.\n");
+			Scanner sc = null;
+			String st = "";
+			try {
+				sc = new Scanner(new BufferedReader(new FileReader(file)));
+				while (sc.hasNextLine()) {
+					st = sc.nextLine();
+					// ignores comment lines and blank lines
+					if (!st.startsWith("//") && !st.equals("")) {
+						process(st);
+					}
+				} // end while
+			} catch (FileNotFoundException e) {
+				displayErrorMessage("File Not Found.");
+			} finally {
+				sc.close();
+			} // end try-catch-finally
 		} // end World constructor
+
+		void process(String st) {
+			System.out.println("Processing >" + st + "<");
+			Scanner sc = new Scanner(st);
+			if (!sc.hasNext()) // checks for end of line
+				return;
+			switch (sc.next()) {
+			case "port":
+				addPort(sc);
+				break;
+			case "dock":
+				addDock(sc);
+				break;
+			case "pship":
+				addPassShip(sc);
+				break;
+			case "cship":
+				addCargoShip(sc);
+				break;
+			case "person":
+				addPerson(sc);
+				break;
+			} // end switch
+		} // end method process
+
+		void addPort(Scanner sc) {
+			SeaPort sp = new SeaPort(sc);
+			ports.add(sp);
+			appendLog("Port " + sp.getName() + " added.\n");
+		} // end method addPort
+
+		void addDock(Scanner sc) {
+			Dock dc = new Dock(sc);
+			// System.out.println(dc.toString());
+			SeaPort sp = getSeaPortByIndex(dc.parent);
+			sp.docks.add(dc);
+			appendLog("Dock " + dc.getName() + " added.\n");
+		} // end method addDock
+
+		void addPassShip(Scanner sc) {
+			PassengerShip ps = new PassengerShip(sc);
+			// System.out.println(ps.toString());
+			assignShip(ps);
+			appendLog("Ship " + ps.getName() + " added.\n");
+		} // end method addPassShip
+
+		void addCargoShip(Scanner sc) {
+			CargoShip cs = new CargoShip(sc);
+			// System.out.println(cs.toString());
+			assignShip(cs);
+			appendLog("Ship " + cs.getName() + " added.\n");
+		} // end method addCargoShip
+
+		void addPerson(Scanner sc) {
+			Person pr = new Person(sc);
+			SeaPort sp = getSeaPortByIndex(pr.parent);
+			sp.persons.add(pr);// adds person to port's roster
+			appendLog("Person " + pr.getName() + " added.\n");
+		} // end method addPerson
+
+		SeaPort getSeaPortByIndex(int x) {
+			for (SeaPort msp : ports)
+				if (msp.index == x)
+					return msp;
+			return null;
+		} // end getPortByIndex
+
+		Dock getDockByIndex(int x) {
+			for (SeaPort msp : ports)
+				for (Dock ms : msp.docks)
+					if (ms.index == x)
+						return ms;
+			return null;
+		} // end getDockByIndex
+
+		Ship getShipByIndex(int x) {
+			for (SeaPort msp : ports)
+				for (Ship ms : msp.ships)
+					if (ms.index == x)
+						return ms;
+			return null;
+		} // end getShipByIndex
+
+		void assignShip(Ship ms) {
+			Dock md = getDockByIndex(ms.parent);
+			if (md == null) {
+				getSeaPortByIndex(ms.parent).ships.add(ms);
+				getSeaPortByIndex(ms.parent).que.add(ms);
+				return;
+			}
+			md.ship = ms;
+			getSeaPortByIndex(md.parent).ships.add(ms);
+		} // end method assignShip
 
 		@Override
 		public String toString() {
@@ -146,7 +365,6 @@ public class SeaPortProgram extends JFrame {
 				st += "\n" + md;
 			return st;
 		} // end method toString
-
 	} // end class World
 
 	public class SeaPort extends Thing {
@@ -163,6 +381,15 @@ public class SeaPortProgram extends JFrame {
 		public SeaPort(Scanner sc) {
 			super(sc);
 		} // end Scanner constructor
+
+		public void addDock(Dock dk) {
+			this.docks.add(dk);
+			appendLog("Dock " + docks.get(docks.size() - 1).name + " added.\n");
+		}
+
+		public String getName() {
+			return super.getName();
+		}
 
 		@Override
 		public String toString() {
@@ -191,9 +418,14 @@ public class SeaPortProgram extends JFrame {
 			super(sc);
 		} // end Scanner constructor
 
+		public String getName() {
+			return super.getName();
+		}
+
 		@Override
 		public String toString() {
-			String st = "\n\nDock: " + super.toString();
+			String st = "\nDock: " + super.toString();
+			st += "\n Ship: " + ship.toString();
 			return st;
 		} // end method toString
 	} // end class Dock
@@ -219,9 +451,13 @@ public class SeaPortProgram extends JFrame {
 				weight = sc.nextDouble();
 			if (sc.hasNextDouble())
 				width = sc.nextDouble();
-			if (sc.hasNext())
-				jobs.add(new Job(sc));
+			// if (sc.hasNext())
+			// jobs.add(new Job(sc));
 		} // end Scanner constructor
+
+		public String getName() {
+			return super.getName();
+		}
 
 		@Override
 		public String toString() {
@@ -251,7 +487,6 @@ public class SeaPortProgram extends JFrame {
 			String st = "Passenger ship: " + super.toString();
 			if (jobs.size() == 0)
 				return st;
-			st += "\n --- Jobs: ";
 			for (Job mj : jobs)
 				st += "\n - " + mj;
 			return st;
@@ -280,7 +515,6 @@ public class SeaPortProgram extends JFrame {
 			String st = "Cargo ship: " + super.toString();
 			if (jobs.size() == 0)
 				return st;
-			st += "\n --- Jobs: ";
 			for (Job mj : jobs)
 				st += "\n - " + mj;
 			return st;
@@ -301,8 +535,7 @@ public class SeaPortProgram extends JFrame {
 		@Override
 		public String toString() {
 			String st = "Person: " + super.toString();
-			st += "\n --- Skills: ";
-			st += "\n - " + skill;
+			st += " " + skill;
 			return st;
 		} // end method toString
 	} // end class Person
