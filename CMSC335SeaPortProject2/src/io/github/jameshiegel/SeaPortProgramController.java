@@ -2,6 +2,7 @@ package io.github.jameshiegel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 //File: SeaPortProgramController.java
 //Date: 04 July 2017
@@ -28,6 +29,11 @@ public class SeaPortProgramController {
 	class loadFileListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			theView.appendLog("Load File button pressed.");
+			try {
+				theModel.loadFile();
+			} catch (FileNotFoundException e1) {
+				theView.displayErrorMessage("File not found!");
+			}
 		} // end method actionPerformed
 	} // end class loadFileListener
 

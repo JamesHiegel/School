@@ -14,11 +14,6 @@ class World extends Thing {
 	protected ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
 	protected PortTime time = new PortTime();
 
-	// constructors
-	public World() {
-		super();
-	} // end default constructor
-
 	// methods
 	public void process(String st) {
 		System.out.println("Processing >" + st + "<");
@@ -104,7 +99,7 @@ class World extends Thing {
 		SeaPort md = getSeaPortByIndex(ms.parent);
 		if (md == null)
 			return;
-		getSeaPortByIndex(md.parent).docks.add(ms);
+		md.docks.add(ms);
 	} // end method assignDock
 
 	void assignShip(Ship ms) {
@@ -122,7 +117,7 @@ class World extends Thing {
 		SeaPort md = getSeaPortByIndex(ms.parent);
 		if (md == null)
 			return;
-		getSeaPortByIndex(md.parent).persons.add(ms);
+		md.persons.add(ms);
 	} // end method assignDock
 
 	public ArrayList<SeaPort> getPorts() {
