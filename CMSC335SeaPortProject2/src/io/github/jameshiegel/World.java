@@ -13,12 +13,6 @@ class World extends Thing {
 	// instance variables
 	protected ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
 	protected PortTime time = new PortTime();
-	JTextField searchTerm;
-	JComboBox<String> searchType;
-	JTree treeView;
-	JTextArea textView;
-	JTable jobStatus;
-	JTextArea log;
 
 	// constructors
 	public World() {
@@ -51,28 +45,28 @@ class World extends Thing {
 	} // end method process
 
 	private void addPerson(Scanner sc) {
-		// TODO Auto-generated method stub
-
+		Person pr = new Person(sc);
+		assignPerson(pr);
 	} // end method addPerson
 
 	private void addCargoShip(Scanner sc) {
-		// TODO Auto-generated method stub
-
+		CargoShip cs = new CargoShip(sc);
+		assignShip(cs);
 	} // end method addPerson
 
 	private void addPassengerShip(Scanner sc) {
-		// TODO Auto-generated method stub
-
+		PassengerShip ps = new PassengerShip(sc);
+		assignShip(ps);
 	} // end method addPerson
 
 	private void addDock(Scanner sc) {
-		// TODO Auto-generated method stub
-
+		Dock dk = new Dock(sc);
+		assignDock(dk);
 	} // end method addPerson
 
 	private void addPort(Scanner sc) {
-		// TODO Auto-generated method stub
-
+		SeaPort sp = new SeaPort(sc);
+		ports.add(sp);
 	} // end method addPerson
 
 	SeaPort getSeaPortByIndex(int x) {
@@ -106,6 +100,13 @@ class World extends Thing {
 		return null;
 	} // end method getPersonByIndex
 
+	void assignDock(Dock ms) {
+		SeaPort md = getSeaPortByIndex(ms.parent);
+		if (md == null)
+			return;
+		getSeaPortByIndex(md.parent).docks.add(ms);
+	} // end method assignDock
+
 	void assignShip(Ship ms) {
 		Dock md = getDockByIndex(ms.parent);
 		if (md == null) {
@@ -116,6 +117,13 @@ class World extends Thing {
 		md.ship = ms;
 		getSeaPortByIndex(md.parent).ships.add(ms);
 	} // end method assignShip
+
+	void assignPerson(Person ms) {
+		SeaPort md = getSeaPortByIndex(ms.parent);
+		if (md == null)
+			return;
+		getSeaPortByIndex(md.parent).persons.add(ms);
+	} // end method assignDock
 
 	public ArrayList<SeaPort> getPorts() {
 		return ports;

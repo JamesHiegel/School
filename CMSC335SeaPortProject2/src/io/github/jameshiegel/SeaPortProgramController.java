@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //File: SeaPortProgramController.java
-//Date: 03 July 2017
+//Date: 04 July 2017
 //Author: James Hiegel
 //Class: UMUC CMSC335 XXXX, Summer 2017
 /*Purpose: Creates instances of the theView, theModel and passes them to the Controller.  
@@ -20,7 +20,7 @@ public class SeaPortProgramController {
 	public SeaPortProgramController(SeaPortProgramView theView, SeaPortProgramModel theModel) {
 		this.theView = theView;
 		this.theModel = theModel;
-
+		
 		this.theView.loadFileBtnListener(new loadFileListener());
 		this.theView.searchBtnListener(new searchListener());
 	} // end SeaPortProgramController constructor

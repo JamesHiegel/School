@@ -1,5 +1,7 @@
 package io.github.jameshiegel;
 
+import java.util.Scanner;
+
 //File: Person.java
 //Date: 03 July 2017
 //Author: James Hiegel
@@ -9,17 +11,23 @@ package io.github.jameshiegel;
 public class Person extends Thing {
 	// instance variables
 	protected String skill = "";
-	
+
 	// constructors
 	public Person() {
 		super();
 	} // end default constructor
-	
+
+	public Person(Scanner sc) {
+		super(sc);
+		while (sc.hasNext())
+			skill += " " + sc.next();
+	} // end Scanner constructor
+
 	// methods
 	public String getSkill() {
 		return skill;
 	} // end method getSkill
-	
+
 	@Override
 	public String toString() {
 		String st = "Person: " + super.toString();

@@ -25,7 +25,7 @@ import javax.swing.JTree;
 import javax.swing.border.Border;
 
 //File: SeaPortProgramView.java
-//Date: 03 July 2017
+//Date: 04 July 2017
 //Author: James Hiegel
 //Class: UMUC CMSC335 XXXX, Summer 2017
 //Purpose: Creates the GUI and provides actionlisteners and helper methods to retrieve form and display to the GUI.
