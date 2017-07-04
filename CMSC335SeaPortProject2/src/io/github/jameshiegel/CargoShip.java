@@ -32,8 +32,7 @@ public class CargoShip {
 
 	@Override
 	public String toString() {
-		String st = "Passenger Ship: " + super.toString();
-		return st;
+		return "Cargo Ship: " + super.toString();
 	} // end method toString
 
 } // end class CargoShip

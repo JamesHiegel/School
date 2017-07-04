@@ -32,7 +32,7 @@ public class World extends Thing {
 
 	@Override
 	public String toString() {
-		return super.toString();
+		return ">>>>> the World:";
 	} // end method toString
 
 } // end class World

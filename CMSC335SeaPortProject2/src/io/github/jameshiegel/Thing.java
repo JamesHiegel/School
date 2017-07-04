@@ -1,5 +1,7 @@
 package io.github.jameshiegel;
 
+import java.text.SimpleDateFormat;
+
 //File: Thing.java
 //Date: 03 July 2017
 //Author: James Hiegel
@@ -29,9 +31,15 @@ public class Thing implements Comparable<Thing> {
 		return parent;
 	} // end method getParent
 
+	// helper method to timestamp log entries
+	public String timeStamp() {
+		return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SS").format(new java.util.Date());
+	} // end method timeStamp
+
 	@Override
 	public String toString() {
-		return name + " " + index;
+		String st = String.format ("%20s %10d", name, index);
+		return st;
 	} // end method toString
 
 	@Override

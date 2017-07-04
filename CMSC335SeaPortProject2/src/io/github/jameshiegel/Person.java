@@ -23,6 +23,7 @@ public class Person extends Thing {
 	@Override
 	public String toString() {
 		String st = "Person: " + super.toString();
+		st += skill;
 		return st;
 	} // end method toString
 

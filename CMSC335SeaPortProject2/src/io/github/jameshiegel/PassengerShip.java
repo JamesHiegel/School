@@ -32,8 +32,12 @@ public class PassengerShip extends Ship {
 
 	@Override
 	public String toString() {
-		String st = "Passenger Ship: " + super.toString();
+		String st = "Passenger ship: " + super.toString();
+		if (jobs.size() == 0)
+			return st;
+		for (Job mj : jobs)
+			st += "\n       - " + mj;
 		return st;
 	} // end method toString
-	
+
 } // end class PassengerShip

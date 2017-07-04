@@ -57,4 +57,12 @@ public class Ship extends Thing {
 		return super.toString();
 	} // end method toString
 
+	// @Override
+	// public String toString() {
+	// String st = super.toString();
+	// st += String.format("%10.2f D %10.2f L %10.2f W %10.2f <-> ", draft,
+	// length, weight, width);
+	// return st;
+	// } // end method toString
+
 } // end class Ship
