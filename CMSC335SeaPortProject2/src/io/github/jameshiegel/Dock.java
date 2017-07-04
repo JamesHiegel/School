@@ -1,5 +1,7 @@
 package io.github.jameshiegel;
 
+import java.util.Scanner;
+
 //File: Dock.java
 //Date: 03 July 2017
 //Author: James Hiegel
@@ -13,8 +15,12 @@ public class Dock extends Thing {
 	// constructors
 	public Dock() {
 		super();
-	} // end constructor
+	} // end default constructor
 
+	public Dock(Scanner sc) {
+		super(sc);
+	} // end Scanner constructor
+	
 	// methods
 	public Ship getShip() {
 		return ship;

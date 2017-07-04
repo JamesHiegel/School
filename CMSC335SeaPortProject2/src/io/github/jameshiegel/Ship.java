@@ -1,6 +1,7 @@
 package io.github.jameshiegel;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //File: Ship.java
 //Date: 03 July 2017
@@ -21,7 +22,19 @@ public class Ship extends Thing {
 	// constructors
 	public Ship() {
 		super();
-	} // end constructor
+	} // end default constructor
+
+	public Ship(Scanner sc) {
+		super(sc);
+		if (sc.hasNextDouble())
+			weight = sc.nextDouble();
+		if (sc.hasNextDouble())
+			length = sc.nextDouble();
+		if (sc.hasNextDouble())
+			width = sc.nextDouble();
+		if (sc.hasNextDouble())
+			draft = sc.nextDouble();
+	} // end Scanner constructor
 
 	// methods
 	public PortTime getArrivalTime() {

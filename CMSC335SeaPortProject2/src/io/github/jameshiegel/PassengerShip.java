@@ -1,5 +1,7 @@
 package io.github.jameshiegel;
 
+import java.util.Scanner;
+
 //File: PassengerShip.java
 //Date: 03 July 2017
 //Author: James Hiegel
@@ -15,7 +17,17 @@ public class PassengerShip extends Ship {
 	// constructors
 	public PassengerShip() {
 		super();
-	} // end constructor
+	} // end default constructor
+
+	public PassengerShip(Scanner sc) {
+		super(sc);
+		if (sc.hasNextInt())
+			numberOfPassengers = sc.nextInt();
+		if (sc.hasNextInt())
+			numberOfRooms = sc.nextInt();
+		if (sc.hasNextInt())
+			numberOfOccupiedRooms = sc.nextInt();
+	} // end Scanner constructor
 
 	// methods
 	public int getNumberOfOccupiedRooms() {

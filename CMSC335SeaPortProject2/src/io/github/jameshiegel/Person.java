@@ -13,7 +13,7 @@ public class Person extends Thing {
 	// constructors
 	public Person() {
 		super();
-	}
+	} // end default constructor
 	
 	// methods
 	public String getSkill() {

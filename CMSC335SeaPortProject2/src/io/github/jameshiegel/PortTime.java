@@ -15,7 +15,7 @@ public class PortTime {
 	// constructors
 	public PortTime() {
 		super();
-	}
+	} // end default constructor
 
 	// methods
 	public int getTime() {

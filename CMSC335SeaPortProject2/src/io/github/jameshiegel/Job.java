@@ -19,7 +19,7 @@ public class Job extends Thing {
 	// constructor
 	public Job() {
 		super();
-	}
+	} // end default constructor
 	
 	// methods
 	public double getDuration() {
