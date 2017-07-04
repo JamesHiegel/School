@@ -1,5 +1,11 @@
 package io.github.jameshiegel;
 
+//File: PassengerShip.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+//Purpose: Simulates a passenger ship.
+
 public class PassengerShip extends Ship {
 	// instance variables
 	protected int numberOfOccupiedRooms = 0;
@@ -29,4 +35,5 @@ public class PassengerShip extends Ship {
 		String st = "Passenger Ship: " + super.toString();
 		return st;
 	} // end method toString
-}
+	
+} // end class PassengerShip

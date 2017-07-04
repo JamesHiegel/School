@@ -2,6 +2,15 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 
+//File: SeaPort.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+/*Purpose: Simulates a Sea Port.  SeaPort objects are composed of a 
+ * number of Docks, where Ships are docked, a que of ships waiting 
+ * to dock, and Persons that can complete Jobs.
+ */
+
 public class SeaPort extends Thing {
 	// instance variables
 	protected ArrayList<Dock> docks = new ArrayList<Dock>();

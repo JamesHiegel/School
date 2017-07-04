@@ -1,5 +1,11 @@
 package io.github.jameshiegel;
 
+//File: Thing.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+//Purpose: The superclass for all objects used in the SeaPortProgram.
+
 public class Thing implements Comparable<Thing> {
 	// instance variables
 	protected int index = 0;
@@ -11,7 +17,6 @@ public class Thing implements Comparable<Thing> {
 	} // end constructor
 
 	// methods
-
 	public int getIndex() {
 		return index;
 	} // end method getIndex

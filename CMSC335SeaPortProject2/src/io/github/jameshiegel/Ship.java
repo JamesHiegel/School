@@ -2,6 +2,12 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 
+//File: Ship.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+//Purpose: A superclass for Passenger and Cargo ships.
+
 public class Ship extends Thing {
 	// instance variables
 	protected PortTime arrivalTime = new PortTime();

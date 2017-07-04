@@ -1,5 +1,11 @@
 package io.github.jameshiegel;
 
+//File: CargoShip.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+//Purpose: Simulates a cargo ship.
+
 public class CargoShip {
 	// instance variables
 	protected double cargoValue = 0.0;
@@ -30,5 +36,4 @@ public class CargoShip {
 		return st;
 	} // end method toString
 
-
-}
+} // end class CargoShip

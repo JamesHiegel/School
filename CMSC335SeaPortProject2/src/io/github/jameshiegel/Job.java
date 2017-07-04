@@ -2,6 +2,15 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 
+//File: Job.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+/*Purpose: Simulates a job that needs to be completed for a Ship. Each 
+ * job requires a specific skill and takes a specified amount of time 
+ * to complete.
+ */
+
 public class Job extends Thing {
 	// instance variables
 	protected double duration = 0.0;
@@ -25,4 +34,5 @@ public class Job extends Thing {
 	public String toString() {
 		return name;
 	} // end method toString
-}
+	
+}// end class Job

@@ -2,6 +2,15 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 
+//File: World.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+/*Purpose: A World object contains a number of Sea Ports, where 
+ * Ships are docked at Docks and Persons complete Jobs.  
+ * Data files are parsed in this class.
+ */
+
 public class World extends Thing {
 	// instance variables
 	protected ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
@@ -25,6 +34,5 @@ public class World extends Thing {
 	public String toString() {
 		return super.toString();
 	} // end method toString
-	
-} // end class World
 
+} // end class World

@@ -1,5 +1,13 @@
 package io.github.jameshiegel;
 
+//File: PortTime.java
+//Date: 03 July 2017
+//Author: James Hiegel
+//Class: UMUC CMSC335 XXXX, Summer 2017
+/*Purpose: A time keeping object used to determine the 
+ * next Ship to dock, and calculate Job progress.
+*/
+
 public class PortTime {
 	// instance variables
 	protected int time = 0;
@@ -22,4 +30,5 @@ public class PortTime {
 	public String toString() {
 		return Integer.toString(time);
 	} // end method toString
-}
+	
+} // end class PortTime
