@@ -43,13 +43,13 @@ class SeaPort extends Thing {
 		String st = "\n\nSeaPort: " + super.toString();
 		for (Dock md : docks)
 			st += "\n" + md;
-		st += "\n --- List of all ships in que:";
+		st += "\n\n --- List of all ships in que:";
 		for (Ship ms : que)
 			st += "\n   > " + ms;
-		st += "\n --- List of all ships:";
+		st += "\n\n --- List of all ships:";
 		for (Ship ms : ships)
 			st += "\n   > " + ms;
-		st += "\n --- List of all persons:";
+		st += "\n\n --- List of all persons:";
 		for (Person mp : persons)
 			st += "\n   > " + mp;
 		return st;

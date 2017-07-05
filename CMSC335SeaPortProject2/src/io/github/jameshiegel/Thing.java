@@ -36,7 +36,8 @@ class Thing implements Comparable<Thing> {
 
 	@Override
 	public String toString() {
-		String st = String.format("%20s %10d", name, index);
+		//String st = String.format("%20s %10d", name, index);
+		String st = name + " " + index;
 		return st;
 	} // end method toString
 

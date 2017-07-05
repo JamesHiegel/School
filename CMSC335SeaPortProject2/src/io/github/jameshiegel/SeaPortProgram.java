@@ -14,6 +14,7 @@ public class SeaPortProgram {
 		SeaPortProgramModel theModel = new SeaPortProgramModel();
 		// instantiates the Controller and passes the references to the View and
 		// Model
+		@SuppressWarnings("unused")
 		SeaPortProgramController theController = new SeaPortProgramController(theView, theModel);
 		// shows the GUI
 		theView.setVisible(true);

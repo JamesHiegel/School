@@ -19,10 +19,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SeaPortProgramModel {
 	// instance variables
 	private FileFilter filter = new FileNameExtensionFilter("Text File", "txt");
-	private World world = new World();
+	private World world = null;
 
 	// methods
+	/**
+	 * Displays a pop up usign JFileChooser where a user can navigate to and
+	 * select a ".txt" data file to load. The file is passed line by line to the
+	 * World.process method for parsing and creation of the multi-tree. Throws a
+	 * FileNotFoundException if the file can't be found after selection by
+	 * JFileChooser.
+	 */
 	public void loadFile() throws FileNotFoundException {
+		world = new World();
 		JFileChooser fc = new JFileChooser(".");
 		Scanner sc = null;
 		String st = "";
@@ -31,21 +39,45 @@ public class SeaPortProgramModel {
 		int returnVal = fc.showOpenDialog(fc);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fc.getSelectedFile();
-		}
+		} // end if
 		try {
 			sc = new Scanner(new BufferedReader(new FileReader(file)));
 			while (sc.hasNextLine()) {
-				st = sc.nextLine();
-				st.trim();
+				st = sc.nextLine().trim();
 				// ignores comment lines and blank lines
 				if (!st.startsWith("//") && !st.equals("")) {
 					world.process(st);
-				}
+				} // end if
 			} // end while
 		} finally {
 			sc.close();
-		} // end try-catch-finally
-
+		} // end try-finally
 	} // end method loadFile
+
+	/**
+	 * This method returns a String output showing all ports, docks, ships and
+	 * persons in the world.
+	 * 
+	 * @return String output showing all ports, docks, ships and persons in the
+	 *         world.
+	 */
+	public String getWorld() {
+		return world.toString();
+	} // end method getWorld
+
+	/**
+	 * This method returns a String showing objects that match the search term
+	 * and search type.
+	 * 
+	 * @param term
+	 *            a String to search for
+	 * @param type
+	 *            the selected field to search in
+	 * @return String showing objects that match the search term and search
+	 *         type.
+	 */
+	public String searchWorld(String term, String type) {
+		return world.search(term, type);
+	} // end method searchWorld
 
 } // end class SeaPortProgramModel

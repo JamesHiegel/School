@@ -28,8 +28,8 @@ public class Dock extends Thing {
 
 	@Override
 	public String toString() {
-		String st = "Dock: " + super.toString();
-		st += "Ship: " + ship.toString();
+		String st = "\n  Dock: " + super.toString();
+		st += "\n    Ship: " + ship.toString();
 		return st;
 	} // end method toString
 	

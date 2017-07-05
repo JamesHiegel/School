@@ -5,13 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,16 +30,23 @@ import javax.swing.border.Border;
 
 public class SeaPortProgramView extends JFrame {
 	// instance variables
+	private static final long serialVersionUID = 924512261883738989L;
+	private final String[] opt = { "Name", "Index", "Draft", "Length", "Weight", "Width", "Number of Passengers",
+			"Number of Occupied Rooms", "Number of Rooms", "Cargo Value", "Cargo Volume", "Cargo Weight", "Skill" };
+
+	// GUI components
 	private JButton loadFileBtn = new JButton("Load File");
 	private JTextField searchTerm = new JTextField(15);
-	private final String[] opt = { "Name", "Index" };
 	private JComboBox<String> searchType = new JComboBox<String>(opt);
 	private JButton searchBtn = new JButton("Search");
+	private JTabbedPane leftPanel = new JTabbedPane();
 	private JTree treeView = new JTree();
 	private JTextArea textView = new JTextArea();
+	private JTabbedPane rightPanel = new JTabbedPane();
 	private JTable jobStatus = new JTable();
-	private JTextArea thingDetails = new JTextArea();
-	private JTextArea log = new JTextArea(5, 20);
+	private JTextArea objectDetails = new JTextArea();
+	private JTextArea searchResults = new JTextArea();
+	private static JTextArea log = new JTextArea(5, 20);
 
 	// methods
 	/**
@@ -51,6 +56,7 @@ public class SeaPortProgramView extends JFrame {
 		setTitle("SeaPort Simulator");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Border blackBorder = BorderFactory.createLineBorder(Color.black);
+		textView.setFont(new java.awt.Font("Monospaced", 0, 12));
 
 		// create master JPanel to hold all JComponents
 		JPanel pane = new JPanel(new BorderLayout());
@@ -71,12 +77,10 @@ public class SeaPortProgramView extends JFrame {
 		// creates middle panel and uses GridLayout to keep both sides equal
 		JPanel midPanel = new JPanel(new GridLayout(1, 2));
 
-		// creates left middle panel and adds components
-		JTabbedPane leftPanel = new JTabbedPane();
+		// left middle panel
 		// makes textView scrollable, ensures it fills the viewport
 		JScrollPane textJSP = new JScrollPane(textView);
 		textView.setEditable(false);
-		jobStatus.setFillsViewportHeight(true);
 		leftPanel.addTab("Text View", textJSP);
 		// makes treeView scrollable
 		JScrollPane treeJSP = new JScrollPane(treeView);
@@ -84,14 +88,20 @@ public class SeaPortProgramView extends JFrame {
 		// add leftPanel to midPanel
 		midPanel.add(leftPanel);
 
-		// creates right middle panel
-		JTabbedPane rightPanel = new JTabbedPane();
+		// right middle panel
 		// makes jobStatus scrollable and adds it to the rightPanel
 		JScrollPane jobJSP = new JScrollPane(jobStatus);
+		jobStatus.setFillsViewportHeight(true);
 		rightPanel.addTab("Job Status", jobJSP);
 		// makes thingDetails scrollable
-		JScrollPane detailsJSP = new JScrollPane(thingDetails);
+		JScrollPane detailsJSP = new JScrollPane(objectDetails);
+		objectDetails.setEditable(false);
 		rightPanel.addTab("Object Details", detailsJSP);
+		// makes searchResults scrollable
+		JScrollPane resultsJSP = new JScrollPane(searchResults);
+		searchResults.setEditable(false);
+		rightPanel.addTab("Search Results", resultsJSP);
+
 		// add rightPanel to midPanel
 		midPanel.add(rightPanel);
 
@@ -118,7 +128,7 @@ public class SeaPortProgramView extends JFrame {
 	 * 
 	 * @return the current date & time format as dd/MM/yyyy HH:mm:ss:SS
 	 */
-	public String timeStamp() {
+	public static String timeStamp() {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SS").format(new java.util.Date());
 	} // end method timeStamp
 
@@ -129,8 +139,32 @@ public class SeaPortProgramView extends JFrame {
 	 * @param text
 	 *            the String to be added to the log.
 	 */
-	public void appendLog(String text) {
+	public static void appendLog(String text) {
 		log.append(timeStamp() + " - " + text + "\n");
+	} // end method appendLog
+
+	/**
+	 * This method displays the specified String in the "Text View" JTextArea
+	 * and sets the JTabbedPane's focus to the "Text View" tab.
+	 * 
+	 * @param text
+	 *            the String to display in the "Text View" JTextAre
+	 */
+	public void setTextView(String text) {
+		textView.setText(text);
+		leftPanel.setSelectedIndex(0);
+	} // end method appendLog
+
+	/**
+	 * This method displays the specified String in the "Search Results"
+	 * JTextArea and sets the JTabbedPane's focus to the "Search Results" tab.
+	 * 
+	 * @param text
+	 *            the String to display in the "Search Results" JTextAre
+	 */
+	public void setSearchResults(String text) {
+		searchResults.setText(text);
+		rightPanel.setSelectedIndex(2);
 	} // end method appendLog
 
 	/**

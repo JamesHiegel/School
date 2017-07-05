@@ -28,15 +28,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SeaPortProgram extends JFrame {
 	private final String[] opt = { "Name", "Index", "Skill", "Length", "Width", "Draft" };
-	private JComboBox jcb = new JComboBox(opt);
+	private JComboBox<String> jcb = new JComboBox<String>(opt);
 	private JTextField searchTerm = new JTextField(15);
 	private JTree jtl = new JTree();
 	private JTextArea jtam = new JTextArea(5, 20);
 	private JTextArea jtar = new JTextArea(5, 20);
 	private FileFilter filter = new FileNameExtensionFilter("Text File", "txt");
 	private World world;
-
-	// TODO Display the results of a Search specified by the user
 
 	public SeaPortProgram() {
 		setTitle("SeaPort Simulator");
@@ -138,10 +136,8 @@ public class SeaPortProgram extends JFrame {
 				break;
 			case "Skill":
 				for (SeaPort sp : world.ports) {
-					for (Dock dk : sp.docks) {
-						for (Person pr : sp.persons) {
-							searchHelper(pr.skill, st);
-						}
+					for (Person pr : sp.persons) {
+						searchHelper(pr.skill, st);
 					}
 				}
 				break;

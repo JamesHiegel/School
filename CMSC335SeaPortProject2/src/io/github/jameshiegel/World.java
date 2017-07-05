@@ -3,12 +3,6 @@ package io.github.jameshiegel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTree;
-
 class World extends Thing {
 	// instance variables
 	protected ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
@@ -16,10 +10,13 @@ class World extends Thing {
 
 	// methods
 	public void process(String st) {
-		System.out.println("Processing >" + st + "<");
+		// System.out.println("Processing >" + st + "<");
+		SeaPortProgramView.appendLog("Processing >" + st + "<");
 		Scanner sc = new Scanner(st);
-		if (!sc.hasNext())
+		if (!sc.hasNext()) {
+			sc.close();
 			return;
+		}
 		switch (sc.next()) {
 		case "port":
 			addPort(sc);
@@ -120,6 +117,144 @@ class World extends Thing {
 		md.persons.add(ms);
 	} // end method assignDock
 
+	public String search(String term, String type) {
+		String results = "";
+		int i = 0;
+		double d = 0.0;
+		PassengerShip ps = null;
+		CargoShip cs = null;
+		Person p = null;
+		// results = term + " " + type;
+		switch (type) {
+		case "Name":
+			for (SeaPort sp : ports) {
+				if (sp.name.equals(term))
+					results += sp.toString();
+				for (Dock dk : sp.docks) {
+					if (dk.name.equals(term))
+						results += dk.toString();
+					if (dk.ship.name.equals(term))
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if (sh.name.equals(term))
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+				for (Person pr : sp.persons) {
+					if (pr.name.equals(term))
+						results += pr.toString();
+				} // end Person for
+			} // end SeaPort for
+			break;
+		case "Index":
+			i = Integer.parseInt(term);
+			for (SeaPort sp : ports) {
+				if (sp.index == i)
+					results += sp.toString();
+				for (Dock dk : sp.docks) {
+					if (dk.index == i)
+						results += dk.toString();
+					if (dk.ship.index == i)
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if (sh.index == i)
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+				for (Person pr : sp.persons) {
+					if (pr.index == i)
+						results += pr.toString();
+				} // end Person for
+			} // end SeaPort for
+			break;
+		case "Draft":
+			d = Double.parseDouble(term);
+			for (SeaPort sp : ports) {
+				for (Dock dk : sp.docks) {
+					if ((Double.compare(dk.ship.draft, d)) == 0)
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if ((Double.compare(sh.draft, d)) == 0)
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+			} // end SeaPort for
+			break;
+		case "Length":
+			d = Double.parseDouble(term);
+			for (SeaPort sp : ports) {
+				for (Dock dk : sp.docks) {
+					if ((Double.compare(dk.ship.length, d)) == 0)
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if ((Double.compare(sh.length, d)) == 0)
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+			} // end SeaPort for
+			break;
+		case "Weight":
+			d = Double.parseDouble(term);
+			for (SeaPort sp : ports) {
+				for (Dock dk : sp.docks) {
+					if ((Double.compare(dk.ship.weight, d)) == 0)
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if ((Double.compare(sh.weight, d)) == 0)
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+			} // end SeaPort for
+			break;
+		case "Width":
+			d = Double.parseDouble(term);
+			for (SeaPort sp : ports) {
+				for (Dock dk : sp.docks) {
+					if ((Double.compare(dk.ship.width, d)) == 0)
+						results += dk.toString();
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if ((Double.compare(sh.width, d)) == 0)
+						results += "\n\nSeaPort: " + sp.name + " " + sp.index + "\n\n --- List of all ships in que:\n"
+								+ sh.toString();
+				} // end Ship for
+			} // end SeaPort for
+			break;
+		case "Number of Passengers":
+			i = Integer.parseInt(term);
+			for (SeaPort sp : ports) {
+				for (Dock dk : sp.docks) {
+					if (dk.ship instanceof PassengerShip) {
+						ps = (PassengerShip) dk.ship;
+						if (ps.numberOfPassengers == i)
+							results += dk.toString();
+					} // end instanceof if
+				} // end Dock for
+				for (Ship sh : sp.que) {
+					if (sh instanceof PassengerShip) {
+						ps = (PassengerShip) sh;
+						if (ps.numberOfPassengers == i)
+							results += "\n\nSeaPort: " + sp.name + " " + sp.index
+									+ "\n\n --- List of all ships in que:\n" + sh.toString();
+					} // end instanceof if
+				} // end Ship for
+			} // end SeaPort for
+			break;
+		case "Number of Occupied Rooms":
+		case "Number of Rooms":
+		case "Cargo Value":
+		case "Cargo Volume":
+		case "Cargo Weight":
+		case "Skill":
+		} // end switch
+		return results;
+	} // end method search
+
 	public ArrayList<SeaPort> getPorts() {
 		return ports;
 	} // end method getPorts
@@ -130,7 +265,10 @@ class World extends Thing {
 
 	@Override
 	public String toString() {
-		return ">>>>> the World:";
+		String st = ">>>>> The World:";
+		for (SeaPort sp : ports)
+			st += sp;
+		return st;
 	} // end method toString
 
 } // end class World
