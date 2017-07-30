@@ -1,5 +1,6 @@
 package io.github.jameshiegel;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
 //File: PassengerShip.java
@@ -52,4 +53,25 @@ public class PassengerShip extends Ship {
 		return st;
 	} // end method toString
 
+	public static Comparator<PassengerShip> PassShipNumOccupiedRoomsComparator = new Comparator<PassengerShip>() {
+		@Override
+		public int compare(PassengerShip arg0, PassengerShip arg1) {
+			return arg0.numberOfOccupiedRooms - arg1.numberOfOccupiedRooms;
+		} // end compare
+	}; // end method PassShipNumOccupiedRoomsComparator
+	
+	public static Comparator<PassengerShip> PassShipNumPassComparator = new Comparator<PassengerShip>() {
+		@Override
+		public int compare(PassengerShip arg0, PassengerShip arg1) {
+			return arg0.numberOfPassengers - arg1.numberOfPassengers;
+		} // end compare
+	}; // end method PassShipNumPassComparator
+	
+	public static Comparator<PassengerShip> PassShipNumRoomsComparator = new Comparator<PassengerShip>() {
+		@Override
+		public int compare(PassengerShip arg0, PassengerShip arg1) {
+			return arg0.numberOfRooms - arg1.numberOfRooms;
+		} // end compare
+	}; // end method PassShipNumRoomsComparator
+	
 } // end class PassengerShip

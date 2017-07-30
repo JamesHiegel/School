@@ -43,8 +43,7 @@ class Thing implements Comparable<Thing> {
 
 	@Override
 	public int compareTo(Thing o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (this.name).compareTo(o.name);
 	} // end method compareTo
-
+		
 } // end class Thing

@@ -1,6 +1,7 @@
 package io.github.jameshiegel;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 //File: Ship.java
@@ -70,6 +71,34 @@ public class Ship extends Thing {
 		return super.toString();
 	} // end method toString
 
+	public static Comparator<Ship> ShipWeightComparator = new Comparator<Ship>() {
+		@Override
+		public int compare(Ship arg0, Ship arg1) {
+			return Double.compare(arg0.weight, arg1.weight);
+		} // end compare
+	}; // end method ShipWeightComparator
+
+	public static Comparator<Ship> ShipLengthComparator = new Comparator<Ship>() {
+		@Override
+		public int compare(Ship arg0, Ship arg1) {
+			return Double.compare(arg0.length, arg1.length);
+		} // end compare
+	}; // end method ShipLengthComparator
+	
+	public static Comparator<Ship> ShipWidthComparator = new Comparator<Ship>() {
+		@Override
+		public int compare(Ship arg0, Ship arg1) {
+			return Double.compare(arg0.width, arg1.width);
+		} // end compare
+	}; // end method ShipWidthComparator
+	
+	public static Comparator<Ship> ShipDraftComparator = new Comparator<Ship>() {
+		@Override
+		public int compare(Ship arg0, Ship arg1) {
+			return Double.compare(arg0.draft, arg1.draft);
+		} // end compare
+	}; // end method ShipDraftComparator
+	
 	// @Override
 	// public String toString() {
 	// String st = super.toString();

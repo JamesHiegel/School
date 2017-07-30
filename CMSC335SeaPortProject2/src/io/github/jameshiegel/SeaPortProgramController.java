@@ -25,6 +25,7 @@ public class SeaPortProgramController {
 		// actionlisteners
 		this.theView.loadFileBtnListener(new loadFileListener());
 		this.theView.searchBtnListener(new searchListener());
+		this.theView.sortBtnListener(new sortListener());
 	} // end SeaPortProgramController constructor
 
 	/**
@@ -56,11 +57,24 @@ public class SeaPortProgramController {
 			//SeaPortProgramView.appendLog("Search button pressed. Search terms: " + theView.getSearchTerm()
 			//		+ ", search type: " + theView.getSearchType());
 			String text = null;
-			// TODO pass search terms and search type to theModel
 			text = theModel.searchWorld(theView.getSearchTerm(), theView.getSearchType());
-			// TODO display result from theModel on theView
 			theView.setSearchResults(text);
 		} // end method actionPerformed
 	} // end class loadFileListener
 
+	/**
+	 * ActionListener for the "Sort" button that passes the search term and
+	 * sort type from the SeaPortProgramView class to the SeaPortProgramModel
+	 * class for processing. Then passes the resulting String from the
+	 * SeaPortProgramModel class to the SeaPortProgramView class for display.
+	 */
+	class sortListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			SeaPortProgramView.appendLog("Sort button pressed. Sort Type: " + theView.getSortType());
+			String text = null;
+			text = theModel.sortWorld(theView.getSortType());
+			theView.setSearchResults(text);
+		} // end method actionPerformed
+	} // end class loadFileListener
+	
 } // end class SeaPortProgramController

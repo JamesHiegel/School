@@ -1,5 +1,6 @@
 package io.github.jameshiegel;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
 //File: CargoShip.java
@@ -47,4 +48,24 @@ public class CargoShip extends Ship {
 		return "Cargo Ship: " + super.toString();
 	} // end method toString
 
+	public static Comparator<CargoShip> CargoShipValueComparator = new Comparator<CargoShip>() {
+		@Override
+		public int compare(CargoShip arg0, CargoShip arg1) {
+			return Double.compare(arg0.cargoValue, arg1.cargoValue);
+		} // end compare
+	}; // end method CargoShipValueComparator
+	
+	public static Comparator<CargoShip> CargoShipVolumeComparator = new Comparator<CargoShip>() {
+		@Override
+		public int compare(CargoShip arg0, CargoShip arg1) {
+			return Double.compare(arg0.cargoVolume, arg1.cargoVolume);
+		} // end compare
+	}; // end method CargoShipVolumeComparator
+	
+	public static Comparator<CargoShip> CargoShipWeightComparator = new Comparator<CargoShip>() {
+		@Override
+		public int compare(CargoShip arg0, CargoShip arg1) {
+			return Double.compare(arg0.cargoWeight, arg1.cargoWeight);
+		} // end compare
+	}; // end method CargoShipWeightComparator
 } // end class CargoShip

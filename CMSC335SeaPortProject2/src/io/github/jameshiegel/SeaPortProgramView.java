@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -36,18 +37,23 @@ public class SeaPortProgramView extends JFrame {
 
 	// GUI components
 	private JButton loadFileBtn = new JButton("Load File");
-	private JTextField searchTerm = new JTextField(15);
+	private JTextField searchTerm = new JTextField(12);
 	private JComboBox<String> searchType = new JComboBox<String>(opt);
 	private JButton searchBtn = new JButton("Search");
+	private JComboBox<String> sortType = new JComboBox<String>(opt);
+	private JButton sortBtn = new JButton("Sort by");
+	
 	private JTabbedPane leftPanel = new JTabbedPane();
 	private JTree treeView = new JTree();
 	private JTextArea textView = new JTextArea();
+	
 	private JTabbedPane rightPanel = new JTabbedPane();
 	private JTable jobStatus = new JTable();
 	private JTextArea objectDetails = new JTextArea();
 	private JTextArea searchResults = new JTextArea();
+	
 	private static JTextArea log = new JTextArea(5, 20);
-
+	
 	// methods
 	/**
 	 * This method creates the GUI.
@@ -57,6 +63,7 @@ public class SeaPortProgramView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Border blackBorder = BorderFactory.createLineBorder(Color.black);
 		textView.setFont(new java.awt.Font("Monospaced", 0, 12));
+		searchResults.setFont(new java.awt.Font("Monospaced", 0, 12));
 
 		// create master JPanel to hold all JComponents
 		JPanel pane = new JPanel(new BorderLayout());
@@ -71,6 +78,8 @@ public class SeaPortProgramView extends JFrame {
 		topPanel.add(searchTerm);
 		topPanel.add(searchType);
 		topPanel.add(searchBtn);
+		topPanel.add(sortType);
+		topPanel.add(sortBtn);
 		// add topPanel to master panel
 		pane.add(topPanel, BorderLayout.PAGE_START);
 
@@ -179,12 +188,21 @@ public class SeaPortProgramView extends JFrame {
 	/**
 	 * This method returns the selected String in the searchType JComboBox.
 	 * 
-	 * @return the selected String in the Search Type JComboBox
+	 * @return the selected String to be searched for
 	 */
 	public String getSearchType() {
 		return (String) searchType.getSelectedItem();
 	} // end method getSearchType
 
+	/**
+	 * This method returns the selected String in the sortType JComboBox.
+	 * 
+	 * @return the selected String to sort
+	 */
+	public String getSortType() {
+		return (String) sortType.getSelectedItem();
+	} // end method getSortType
+	
 	/**
 	 * This method listens for a user to press the "Load File" button and then
 	 * executes an action listener method in the controller
@@ -205,6 +223,16 @@ public class SeaPortProgramView extends JFrame {
 		searchBtn.addActionListener(listenForButton);
 	} // end searchBtn actionlistener
 
+	/**
+	 * This method listens for a user to press the "Sort" button and then
+	 * executes an action listener method in the controller
+	 * 
+	 * @param sortBtn
+	 */
+	void sortBtnListener(ActionListener listenForButton) {
+		sortBtn.addActionListener(listenForButton);
+	} // end searchBtn actionlistener
+	
 	/**
 	 * This method displays an error message in a pop-up window.
 	 * 

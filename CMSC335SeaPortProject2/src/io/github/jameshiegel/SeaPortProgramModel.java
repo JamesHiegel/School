@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -80,4 +81,18 @@ public class SeaPortProgramModel {
 		return world.search(term, type);
 	} // end method searchWorld
 
+	/**
+	 * This method returns a String showing objects sorted by type from largest
+	 * to smallest.
+	 * 
+	 * @param sortType
+	 *            a String to sort by
+	 * @return 
+	 * 
+	 * @return String listing objects in sorted order
+	 */
+	public String sortWorld(String sortType) {
+		return world.sort(sortType);
+	}
+	
 } // end class SeaPortProgramModel
