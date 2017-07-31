@@ -72,7 +72,12 @@ class World extends Thing {
 		hmThings.put(jb.getIndex(), jb);
 		assignJob(jb);
 		// add to tree
-		DefaultMutableTreeNode node = getParentNode(getShipByIndex(jb.getParent()).getName());
+		DefaultMutableTreeNode node = null;
+		if (getShipByIndex(jb.getParent()) != null) {
+			node = getParentNode(getShipByIndex(jb.getParent()).getName());
+		} else if (getDockByIndex(jb.getParent()) != null) {
+			node = getParentNode(getDockByIndex(jb.getParent()).getName());
+		}
 		node.add(new DefaultMutableTreeNode(jb.getName()));
 	} // end method addPerson
 

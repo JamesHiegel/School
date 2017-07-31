@@ -68,7 +68,9 @@ public class Ship extends Thing {
 
 	@Override
 	public String toString() {
-		return super.toString();
+		String st = super.toString();
+		st += jobs.toString();
+		return st;
 	} // end method toString
 
 	public static Comparator<Ship> ShipWeightComparator = new Comparator<Ship>() {

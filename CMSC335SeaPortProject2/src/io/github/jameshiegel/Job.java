@@ -12,7 +12,7 @@ import java.util.Scanner;
  * to complete.
  */
 
-public class Job extends Thing {
+public class Job extends Thing implements Runnable{
 	// instance variables
 	protected double duration = 0.0;
 	protected ArrayList<String> requirements = new ArrayList<String>();
@@ -42,5 +42,11 @@ public class Job extends Thing {
 	public String toString() {
 		return name;
 	} // end method toString
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }// end class Job
