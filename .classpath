@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="HelloWorld/src/|CMSC350Project2/src/|CMSC350Project3/src/|CMSC350Project4/src/|InFixCalculator/src/|CMSC330Project1/src/|CMSC335SeaPortProject/src/|CMSC335SeaPortProject2/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="CMSC330Project1/src"/>
+	<classpathentry kind="src" path="CMSC335SeaPortProject/src"/>
+	<classpathentry kind="src" path="CMSC335SeaPortProject2/src"/>
+	<classpathentry kind="src" path="CMSC350Project2/src"/>
+	<classpathentry kind="src" path="CMSC350Project3/src"/>
+	<classpathentry kind="src" path="CMSC350Project4/src"/>
+	<classpathentry kind="src" path="HelloWorld/src"/>
+	<classpathentry kind="src" path="InFixCalculator/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="CMSC330Project1/bin"/>
+</classpath>

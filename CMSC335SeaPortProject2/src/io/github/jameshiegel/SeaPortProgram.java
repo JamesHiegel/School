@@ -18,6 +18,7 @@ public class SeaPortProgram {
 		SeaPortProgramController theController = new SeaPortProgramController(theView, theModel);
 		// shows the GUI
 		theView.setVisible(true);
+
 	} // end method main
 
 } // end class SeaPortProgram

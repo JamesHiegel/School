@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
+import javax.swing.JTree;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -87,12 +87,21 @@ public class SeaPortProgramModel {
 	 * 
 	 * @param sortType
 	 *            a String to sort by
-	 * @return 
+	 * @return
 	 * 
 	 * @return String listing objects in sorted order
 	 */
 	public String sortWorld(String sortType) {
 		return world.sort(sortType);
-	}
-	
+	} // end method sortWorld
+
+	/**
+	 * Returns a JTree for display in the GUI.
+	 * 
+	 * @return the JTree to be displayed.
+	 */
+	public JTree getTree() {
+		return world.getTree();
+	} // end method getTree
+
 } // end class SeaPortProgramModel

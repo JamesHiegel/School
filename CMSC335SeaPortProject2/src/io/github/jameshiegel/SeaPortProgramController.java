@@ -37,9 +37,16 @@ public class SeaPortProgramController {
 	class loadFileListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			SeaPortProgramView.appendLog("Load File button pressed.");
+
 			try {
+				// parses the selected file
 				theModel.loadFile();
+				// passes a String showing the world contents to the GUI
 				theView.setTextView(theModel.getWorld());
+				// passes the JTree from the model to the GUI to display data 
+				theView.setTreeView(theModel.getTree());
+				//TODO: pass the JTable from the model to the GUI to display data 
+				
 			} catch (FileNotFoundException e1) {
 				theView.displayErrorMessage("File not found!");
 			}
@@ -54,8 +61,9 @@ public class SeaPortProgramController {
 	 */
 	class searchListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			//SeaPortProgramView.appendLog("Search button pressed. Search terms: " + theView.getSearchTerm()
-			//		+ ", search type: " + theView.getSearchType());
+			// SeaPortProgramView.appendLog("Search button pressed. Search
+			// terms: " + theView.getSearchTerm()
+			// + ", search type: " + theView.getSearchType());
 			String text = null;
 			text = theModel.searchWorld(theView.getSearchTerm(), theView.getSearchType());
 			theView.setSearchResults(text);
@@ -63,9 +71,9 @@ public class SeaPortProgramController {
 	} // end class loadFileListener
 
 	/**
-	 * ActionListener for the "Sort" button that passes the search term and
-	 * sort type from the SeaPortProgramView class to the SeaPortProgramModel
-	 * class for processing. Then passes the resulting String from the
+	 * ActionListener for the "Sort" button that passes the search term and sort
+	 * type from the SeaPortProgramView class to the SeaPortProgramModel class
+	 * for processing. Then passes the resulting String from the
 	 * SeaPortProgramModel class to the SeaPortProgramView class for display.
 	 */
 	class sortListener implements ActionListener {
@@ -76,5 +84,5 @@ public class SeaPortProgramController {
 			theView.setSearchResults(text);
 		} // end method actionPerformed
 	} // end class loadFileListener
-	
+
 } // end class SeaPortProgramController

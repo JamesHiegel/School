@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -42,18 +41,19 @@ public class SeaPortProgramView extends JFrame {
 	private JButton searchBtn = new JButton("Search");
 	private JComboBox<String> sortType = new JComboBox<String>(opt);
 	private JButton sortBtn = new JButton("Sort by");
-	
+
 	private JTabbedPane leftPanel = new JTabbedPane();
 	private JTree treeView = new JTree();
+	private JScrollPane treeJSP = new JScrollPane(treeView);
 	private JTextArea textView = new JTextArea();
-	
+
 	private JTabbedPane rightPanel = new JTabbedPane();
 	private JTable jobStatus = new JTable();
 	private JTextArea objectDetails = new JTextArea();
 	private JTextArea searchResults = new JTextArea();
-	
+
 	private static JTextArea log = new JTextArea(5, 20);
-	
+
 	// methods
 	/**
 	 * This method creates the GUI.
@@ -91,8 +91,7 @@ public class SeaPortProgramView extends JFrame {
 		JScrollPane textJSP = new JScrollPane(textView);
 		textView.setEditable(false);
 		leftPanel.addTab("Text View", textJSP);
-		// makes treeView scrollable
-		JScrollPane treeJSP = new JScrollPane(treeView);
+
 		leftPanel.addTab("Tree View", treeJSP);
 		// add leftPanel to midPanel
 		midPanel.add(leftPanel);
@@ -202,7 +201,7 @@ public class SeaPortProgramView extends JFrame {
 	public String getSortType() {
 		return (String) sortType.getSelectedItem();
 	} // end method getSortType
-	
+
 	/**
 	 * This method listens for a user to press the "Load File" button and then
 	 * executes an action listener method in the controller
@@ -232,7 +231,7 @@ public class SeaPortProgramView extends JFrame {
 	void sortBtnListener(ActionListener listenForButton) {
 		sortBtn.addActionListener(listenForButton);
 	} // end searchBtn actionlistener
-	
+
 	/**
 	 * This method displays an error message in a pop-up window.
 	 * 
@@ -242,5 +241,15 @@ public class SeaPortProgramView extends JFrame {
 	public void displayErrorMessage(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
 	} // end method displayErrorMessage
+
+	/**
+	 * Displays the provided JTree in the GUI.
+	 * 
+	 * @param tree
+	 *            the JTree to be displayed.
+	 */
+	public void setTreeView(JTree tree) {
+		treeJSP.setViewportView(tree);
+	} // end method setTreeView
 
 } // end class SeaPortProgramView

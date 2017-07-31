@@ -2,10 +2,14 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 class World extends Thing {
 	// instance variables
@@ -13,6 +17,10 @@ class World extends Thing {
 	protected PortTime time = new PortTime();
 	// HashMap to hold all objects in the World
 	protected HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
+
+	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
+	@SuppressWarnings("unused")
+	private JTree tree;
 
 	// methods
 	/**
@@ -25,6 +33,7 @@ class World extends Thing {
 	public void process(String st) {
 		// System.out.println("Processing >" + st + "<");
 		SeaPortProgramView.appendLog("Processing >" + st + "<");
+
 		Scanner sc = new Scanner(st);
 		if (!sc.hasNext()) {
 			sc.close();
@@ -60,6 +69,7 @@ class World extends Thing {
 		Person pr = new Person(sc);
 		hmThings.put(pr.getIndex(), pr);
 		assignPerson(pr);
+
 	} // end method addPerson
 
 	/**
@@ -73,6 +83,7 @@ class World extends Thing {
 		CargoShip cs = new CargoShip(sc);
 		hmThings.put(cs.getIndex(), cs);
 		assignShip(cs);
+
 	} // end method addPerson
 
 	/**
@@ -86,6 +97,17 @@ class World extends Thing {
 		PassengerShip ps = new PassengerShip(sc); // create PassengerShip
 		hmThings.put(ps.getIndex(), ps); // add to hmThings HashMap
 		assignShip(ps); // add to parent
+
+		DefaultMutableTreeNode node = null;
+		Thing th = getSeaPortByIndex(ps.getParent());
+		if (th != null) {
+			node = getParentNode(getSeaPortByIndex(ps.getParent()).getName());
+		} else {
+			node = getParentNode(getDockByIndex(ps.getParent()).getName());
+		}
+		node.add(new DefaultMutableTreeNode(ps.getName()));
+		System.out.println("Added " + ps.getName() + " to " + node);
+
 	} // end method addPerson
 
 	/**
@@ -99,6 +121,12 @@ class World extends Thing {
 		Dock dk = new Dock(sc); // create dock
 		hmThings.put(dk.getIndex(), dk); // add to hmThings HashMap
 		assignDock(dk); // add to parent SeaPort
+
+		// DefaultMutableTreeNode node =
+		// getParentNode(getSeaPortByIndex(dk.getParent()).getName(), root);
+		DefaultMutableTreeNode node = getParentNode(getSeaPortByIndex(dk.getParent()).getName());
+		node.add(new DefaultMutableTreeNode(dk.getName()));
+		System.out.println("Added " + dk.getName() + " to " + node);
 	} // end method addPerson
 
 	/**
@@ -112,6 +140,9 @@ class World extends Thing {
 		SeaPort sp = new SeaPort(sc); // create port
 		hmThings.put(sp.getIndex(), sp); // add to hmThings HashMap
 		ports.add(sp); // add to ports ArrayList
+
+		root.add(new DefaultMutableTreeNode(sp.getName()));
+		System.out.println("Added " + sp.getName() + " to " + root);
 	} // end method addPerson
 
 	/**
@@ -799,8 +830,41 @@ class World extends Thing {
 				st += "\nPerson: " + sp.name + " " + sp.index + "\n >Skills: " + entry.getKey();
 			} // end for loop
 			return st;
-		}
+		} // end switch
 		return st;
 	} // end method sort
+
+	/**
+	 * Returns a JTree object for display in the GUI.
+	 * 
+	 * @return a JTree object
+	 */
+	public JTree getTree() {
+		return tree = new JTree(root);
+	} // end method getTree
+
+	/**
+	 * Returns a DefaultMutableTreeNode object whose name matches the provided
+	 * String. NOTE: this code was based upon code examples from www.java2s.com
+	 * 
+	 * @param st
+	 *            the String to be searched for
+	 * 
+	 * @return a DefaultMutableTreeNode object
+	 */
+	public DefaultMutableTreeNode getParentNode(String st) {
+		DefaultMutableTreeNode node = null;
+		// creates an enumeration that traverses the subtree
+		Enumeration<?> e = root.breadthFirstEnumeration();
+		// iterates through the array until if finds the requested string
+		while (e.hasMoreElements()) {
+			node = (DefaultMutableTreeNode) e.nextElement();
+			// compares the node's name to the search string
+			if (st.equals(node.getUserObject().toString())) {
+				return node;
+			} // end if
+		} // end while
+		return null;
+	} // end method getParentNode
 
 } // end class World
