@@ -1,6 +1,7 @@
 package io.github.jameshiegel;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //File: Job.java
 //Date: 03 July 2017
@@ -20,6 +21,13 @@ public class Job extends Thing {
 	public Job() {
 		super();
 	} // end default constructor
+	public Job(Scanner sc) {
+		super(sc);
+		if (sc.hasNextDouble())
+			duration = sc.nextDouble();
+		while (sc.hasNext())
+			requirements.add(sc.next());
+	} // end Scanner constructor
 	
 	// methods
 	public double getDuration() {
