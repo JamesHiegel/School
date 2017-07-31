@@ -55,8 +55,26 @@ class World extends Thing {
 		case "person":
 			addPerson(sc);
 			break;
+		case "job":
+			addJob(sc);
+			break;
 		} // end switch
 	} // end method process
+
+	/**
+	 * Creates a Job object and adds it to it's parent and the hmThings HashMap.
+	 * 
+	 * @param sc
+	 *            the String to be parsed into a Person.
+	 */
+	private void addJob(Scanner sc) {
+		Job jb = new Job(sc);
+		hmThings.put(jb.getIndex(), jb);
+		assignJob(jb);
+		// add to tree
+		DefaultMutableTreeNode node = getParentNode(getShipByIndex(jb.getParent()).getName());
+		node.add(new DefaultMutableTreeNode(jb.getName()));
+	} // end method addPerson
 
 	/**
 	 * Creates a Person object and adds it to it's parent and the hmThings
@@ -69,7 +87,15 @@ class World extends Thing {
 		Person pr = new Person(sc);
 		hmThings.put(pr.getIndex(), pr);
 		assignPerson(pr);
-
+		// add to tree
+		DefaultMutableTreeNode node = null;
+		Thing th = getSeaPortByIndex(pr.getParent());
+		if (th != null) {
+			node = getParentNode(getSeaPortByIndex(pr.getParent()).getName());
+		} else {
+			node = getParentNode(getDockByIndex(pr.getParent()).getName());
+		}
+		node.add(new DefaultMutableTreeNode(pr.getName()));
 	} // end method addPerson
 
 	/**
@@ -83,7 +109,15 @@ class World extends Thing {
 		CargoShip cs = new CargoShip(sc);
 		hmThings.put(cs.getIndex(), cs);
 		assignShip(cs);
-
+		// add to tree
+		DefaultMutableTreeNode node = null;
+		Thing th = getSeaPortByIndex(cs.getParent());
+		if (th != null) {
+			node = getParentNode(getSeaPortByIndex(cs.getParent()).getName());
+		} else {
+			node = getParentNode(getDockByIndex(cs.getParent()).getName());
+		}
+		node.add(new DefaultMutableTreeNode(cs.getName()));
 	} // end method addPerson
 
 	/**
@@ -97,7 +131,7 @@ class World extends Thing {
 		PassengerShip ps = new PassengerShip(sc); // create PassengerShip
 		hmThings.put(ps.getIndex(), ps); // add to hmThings HashMap
 		assignShip(ps); // add to parent
-
+		// add to tree
 		DefaultMutableTreeNode node = null;
 		Thing th = getSeaPortByIndex(ps.getParent());
 		if (th != null) {
@@ -106,8 +140,7 @@ class World extends Thing {
 			node = getParentNode(getDockByIndex(ps.getParent()).getName());
 		}
 		node.add(new DefaultMutableTreeNode(ps.getName()));
-		System.out.println("Added " + ps.getName() + " to " + node);
-
+		// System.out.println("Added " + ps.getName() + " to " + node);
 	} // end method addPerson
 
 	/**
@@ -121,12 +154,10 @@ class World extends Thing {
 		Dock dk = new Dock(sc); // create dock
 		hmThings.put(dk.getIndex(), dk); // add to hmThings HashMap
 		assignDock(dk); // add to parent SeaPort
-
-		// DefaultMutableTreeNode node =
-		// getParentNode(getSeaPortByIndex(dk.getParent()).getName(), root);
+		// add dock to tree
 		DefaultMutableTreeNode node = getParentNode(getSeaPortByIndex(dk.getParent()).getName());
 		node.add(new DefaultMutableTreeNode(dk.getName()));
-		System.out.println("Added " + dk.getName() + " to " + node);
+		// System.out.println("Added " + dk.getName() + " to " + node);
 	} // end method addPerson
 
 	/**
@@ -140,9 +171,9 @@ class World extends Thing {
 		SeaPort sp = new SeaPort(sc); // create port
 		hmThings.put(sp.getIndex(), sp); // add to hmThings HashMap
 		ports.add(sp); // add to ports ArrayList
-
+		// add port to tree
 		root.add(new DefaultMutableTreeNode(sp.getName()));
-		System.out.println("Added " + sp.getName() + " to " + root);
+		// System.out.println("Added " + sp.getName() + " to " + root);
 	} // end method addPerson
 
 	/**
@@ -219,6 +250,19 @@ class World extends Thing {
 			return (Person) th; // if true, cast to Person and return
 		return null;
 	} // end method getPersonByIndex
+
+	/**
+	 * Assigns a provided Job object to its parent Ship.
+	 * 
+	 * @param jb
+	 *            the Job to be assigned.
+	 */
+	void assignJob(Job jb) {
+		Ship md = getShipByIndex(jb.parent);
+		if (md == null)
+			return;
+		md.jobs.add(jb);
+	} // end method assignDock
 
 	/**
 	 * Assigns a provided Dock object to its parent SeaPort.
