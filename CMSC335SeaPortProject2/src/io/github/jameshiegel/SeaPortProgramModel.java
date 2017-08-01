@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -103,5 +104,15 @@ public class SeaPortProgramModel {
 	public JTree getTree() {
 		return world.getTree();
 	} // end method getTree
+
+	/**
+	 * Passes a JTable for displaying jobs
+	 * 
+	 * @param jTable
+	 *            the JTable to be passed
+	 */
+	public void setJTable(JTable jTable) {
+		world.setJTable(jTable);
+	} // end method setJTable
 
 } // end class SeaPortProgramModel

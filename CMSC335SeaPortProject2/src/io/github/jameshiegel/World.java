@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -21,6 +22,8 @@ class World extends Thing {
 	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
 	@SuppressWarnings("unused")
 	private JTree tree;
+
+	private JTable jobstatus;
 
 	// methods
 	/**
@@ -915,5 +918,15 @@ class World extends Thing {
 		} // end while
 		return null;
 	} // end method getParentNode
+
+	/**
+	 * Sets the jobStatus table to the received JTable
+	 * 
+	 * @param st
+	 *            the String to be searched for
+	 */
+	public void setJTable(JTable jTable) {
+		jobstatus = jTable;
+	} // end method setJTable
 
 } // end class World

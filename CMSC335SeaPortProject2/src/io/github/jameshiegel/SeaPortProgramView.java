@@ -252,4 +252,13 @@ public class SeaPortProgramView extends JFrame {
 		treeJSP.setViewportView(tree);
 	} // end method setTreeView
 
+	/**
+	 * Returns a JTable for displaying jobs
+	 * 
+	 * @return a JTable
+	 */
+	public JTable getJTable() {
+		return jobStatus;
+	} // end method getJTable
+
 } // end class SeaPortProgramView

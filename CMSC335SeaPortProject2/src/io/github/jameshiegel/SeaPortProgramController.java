@@ -43,10 +43,10 @@ public class SeaPortProgramController {
 				theModel.loadFile();
 				// passes a String showing the world contents to the GUI
 				theView.setTextView(theModel.getWorld());
-				// passes the JTree from the model to the GUI to display data 
+				// passes the JTree from the model to the GUI to display data
 				theView.setTreeView(theModel.getTree());
-				//TODO: pass the JTable from the model to the GUI to display data 
-				
+				// passes the JTable from the GUI to the model to display data
+				theModel.setJTable(theView.getJTable());
 			} catch (FileNotFoundException e1) {
 				theView.displayErrorMessage("File not found!");
 			}
