@@ -42,20 +42,18 @@ public class Job extends Thing implements Runnable {
 	public ArrayList<String> getRequirements() {
 		return requirements;
 	} // end method getRequirements
-	
+
 	public void setThread(Thread thread) {
 		this.thread = thread;
 	} // end method setThread
-	
+
 	public void setBar(JProgressBar bar) {
 		this.bar = bar;
 	} // end method setBar
 
 	@Override
 	public String toString() {
-		return null;
-		// return name;
-		// return requirements.toString();
+		return requirements.toString();
 	} // end method toString
 
 	@Override

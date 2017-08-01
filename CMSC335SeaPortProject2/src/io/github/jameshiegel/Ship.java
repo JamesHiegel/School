@@ -69,7 +69,6 @@ public class Ship extends Thing {
 	@Override
 	public String toString() {
 		String st = super.toString();
-		st += jobs.toString();
 		return st;
 	} // end method toString
 
