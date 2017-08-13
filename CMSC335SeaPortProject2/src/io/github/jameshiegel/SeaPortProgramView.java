@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -48,7 +47,7 @@ public class SeaPortProgramView extends JFrame {
 	private JTextArea textView = new JTextArea();
 
 	private JTabbedPane rightPanel = new JTabbedPane();
-	private JTable jobStatus = new JTable();
+	private JPanel jobStatus = new JPanel();
 	private JTextArea objectDetails = new JTextArea();
 	private JTextArea searchResults = new JTextArea();
 
@@ -99,7 +98,6 @@ public class SeaPortProgramView extends JFrame {
 		// right middle panel
 		// makes jobStatus scrollable and adds it to the rightPanel
 		JScrollPane jobJSP = new JScrollPane(jobStatus);
-		jobStatus.setFillsViewportHeight(true);
 		rightPanel.addTab("Job Status", jobJSP);
 		// makes thingDetails scrollable
 		JScrollPane detailsJSP = new JScrollPane(objectDetails);
@@ -252,4 +250,14 @@ public class SeaPortProgramView extends JFrame {
 		treeJSP.setViewportView(tree);
 	} // end method setTreeView
 
+	/**
+	 * Returns the JPanel that will hold Jobs from the GUI.
+	 * 
+	 * @return jobStatus
+	 *            the JPanel for displaying Jobs.
+	 */
+	public JPanel getJobStatusPane() {
+		return jobStatus;
+	} // end method setTreeView
+	
 } // end class SeaPortProgramView
