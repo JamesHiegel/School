@@ -60,6 +60,7 @@ public class SeaPortProgramModel {
 		} finally {
 			sc.close();
 		} // end try-finally
+		world.createExecutorPools();
 	} // end method loadFile
 
 	/**

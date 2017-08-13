@@ -2,6 +2,8 @@ package io.github.jameshiegel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 class SeaPort extends Thing {
 	// instance variables
@@ -12,10 +14,11 @@ class SeaPort extends Thing {
 	protected ArrayList<Ship> ships = new ArrayList<Ship>();
 	// list of people with skills at this port
 	protected ArrayList<Person> persons = new ArrayList<Person>();
+	
 	// list of skills at this port
 	protected ArrayList<String> skills = new ArrayList<String>();
-
-	// constructors
+	
+		// constructors
 	public SeaPort() {
 		super();
 	} // end default constructor
@@ -70,4 +73,9 @@ class SeaPort extends Thing {
 		return st;
 	} // end method toString
 
+	public void createExecutorPools() {
+		ExecutorService executorService = Executors.newFixedThreadPool(docks.size());
+		//System.out.println(docks.size());
+	}
+	
 } // end class SeaPort
