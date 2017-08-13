@@ -25,7 +25,7 @@ public class SeaPortProgramModel {
 
 	// methods
 	/**
-	 * Displays a pop up usign JFileChooser where a user can navigate to and
+	 * Displays a pop up using JFileChooser where a user can navigate to and
 	 * select a ".txt" data file to load. The file is passed line by line to the
 	 * World.process method for parsing and creation of the multi-tree. Throws a
 	 * FileNotFoundException if the file can't be found after selection by
@@ -114,5 +114,9 @@ public class SeaPortProgramModel {
 	public void setJTable(JTable jTable) {
 		world.setJTable(jTable);
 	} // end method setJTable
+
+	public void startJobs() {
+		world.startJobs();
+	}
 
 } // end class SeaPortProgramModel

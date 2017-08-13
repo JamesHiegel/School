@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -18,12 +19,14 @@ class World extends Thing {
 	protected PortTime time = new PortTime();
 	// HashMap to hold all objects in the World
 	protected HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
-
+	// used for the JTree
 	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
 	@SuppressWarnings("unused")
 	private JTree tree;
-
-	private JTable jobstatus;
+	// used for the JTable
+	private JTable jobStatus;
+	// used to store Jobs
+	private ArrayList<Job> jobs = new ArrayList<Job>();
 
 	// methods
 	/**
@@ -926,7 +929,20 @@ class World extends Thing {
 	 *            the String to be searched for
 	 */
 	public void setJTable(JTable jTable) {
-		jobstatus = jTable;
+		jobStatus = jTable;
 	} // end method setJTable
+
+	public void startJobs() {
+		for (SeaPort p : ports) { // iterates over SeaPorts
+			ArrayList<Dock> dk = p.docks; // loads Dock ArrayList
+			for (Dock d : dk) { // iterates over Docks
+				Ship sh = d.ship; // loads Docked Ship
+				ArrayList<Job> jb = sh.jobs; // loads Job ArrayList
+				for (Job j : jb) { // iterates over Jobs
+					
+				}
+			}
+		}
+	}
 
 } // end class World
