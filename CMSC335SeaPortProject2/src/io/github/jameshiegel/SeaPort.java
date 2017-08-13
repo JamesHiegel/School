@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 class SeaPort extends Thing {
 	// instance variables
-	private ArrayList<Dock> docks = new ArrayList<Dock>();
+	protected ArrayList<Dock> docks = new ArrayList<Dock>();
 	// list of ships waiting to dock
-	private ArrayList<Ship> que = new ArrayList<Ship>();
+	protected ArrayList<Ship> que = new ArrayList<Ship>();
 	// list of all ships at this port
-	private ArrayList<Ship> ships = new ArrayList<Ship>();
+	protected ArrayList<Ship> ships = new ArrayList<Ship>();
 	// list of people with skills at this port
-	private ArrayList<Person> persons = new ArrayList<Person>();
+	protected ArrayList<Person> persons = new ArrayList<Person>();
 	// list of skills at this port
-	private ArrayList<String> skills = new ArrayList<String>();
+	protected ArrayList<String> skills = new ArrayList<String>();
 
 	// constructors
 	public SeaPort() {
