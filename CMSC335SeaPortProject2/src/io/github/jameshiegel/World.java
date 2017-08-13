@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
-
-import javax.swing.JProgressBar;
-import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -23,10 +20,6 @@ class World extends Thing {
 	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
 	@SuppressWarnings("unused")
 	private JTree tree;
-	// used for the JTable
-	private JTable jobStatus;
-	// used to store Jobs
-	private ArrayList<Job> jobs = new ArrayList<Job>();
 
 	// methods
 	/**
@@ -928,21 +921,5 @@ class World extends Thing {
 	 * @param st
 	 *            the String to be searched for
 	 */
-	public void setJTable(JTable jTable) {
-		jobStatus = jTable;
-	} // end method setJTable
-
-	public void startJobs() {
-		for (SeaPort p : ports) { // iterates over SeaPorts
-			ArrayList<Dock> dk = p.docks; // loads Dock ArrayList
-			for (Dock d : dk) { // iterates over Docks
-				Ship sh = d.ship; // loads Docked Ship
-				ArrayList<Job> jb = sh.jobs; // loads Job ArrayList
-				for (Job j : jb) { // iterates over Jobs
-					
-				}
-			}
-		}
-	}
 
 } // end class World
