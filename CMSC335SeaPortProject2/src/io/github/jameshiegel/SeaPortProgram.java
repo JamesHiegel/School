@@ -11,7 +11,7 @@ public class SeaPortProgram {
 	public static void main(String[] args) {
 		// instantiates the View and Model
 		SeaPortProgramView theView = new SeaPortProgramView();
-		SeaPortProgramModel theModel = new SeaPortProgramModel();
+		SeaPortProgramModel theModel = new SeaPortProgramModel(theView.getJobStatusPane());
 		// instantiates the Controller and passes the references to the View and
 		// Model
 		@SuppressWarnings("unused")
