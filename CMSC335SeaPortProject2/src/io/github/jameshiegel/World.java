@@ -7,19 +7,31 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 class World extends Thing {
 	// instance variables
-	protected ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
-	protected PortTime time = new PortTime();
+	private ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
+	private PortTime time = new PortTime();
+	
+	@SuppressWarnings("unused")
+	private JPanel jobStatusPane = new JPanel();
+	
 	// HashMap to hold all objects in the World
-	protected HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
+	private HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
+	
 	// used for the JTree
 	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
 	@SuppressWarnings("unused")
-	private JTree tree;
+	private JTree tree; 
+	
+	// constructor
+	public World(JPanel jobStatusPane) {
+		this.jobStatusPane = jobStatusPane;
+	}
 
 	// methods
 	/**
