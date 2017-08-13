@@ -894,6 +894,9 @@ class World extends Thing {
 		return st;
 	} // end method sort
 
+	//TODO: create custom tree renderer
+	// SeaPort = anchor, Dock = dock, PassengerShip = cruise ship, CargoShip = container ship, Person = person, Job = checklist
+	
 	/**
 	 * Returns a JTree object for display in the GUI.
 	 * 
@@ -926,12 +929,5 @@ class World extends Thing {
 		} // end while
 		return null;
 	} // end method getParentNode
-
-	/**
-	 * Sets the jobStatus table to the received JTable
-	 * 
-	 * @param st
-	 *            the String to be searched for
-	 */
 
 } // end class World

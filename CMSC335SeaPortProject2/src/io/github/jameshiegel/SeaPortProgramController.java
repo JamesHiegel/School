@@ -82,5 +82,11 @@ public class SeaPortProgramController {
 			theView.setSearchResults(text);
 		} // end method actionPerformed
 	} // end class loadFileListener
+	
+	//TODO: expand tree button listener
 
+	//TODO: collapse tree button listener
+	
+	//TODO: tree selection listener
+	
 } // end class SeaPortProgramController

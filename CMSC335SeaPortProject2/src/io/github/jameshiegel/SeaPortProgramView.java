@@ -230,6 +230,12 @@ public class SeaPortProgramView extends JFrame {
 		sortBtn.addActionListener(listenForButton);
 	} // end searchBtn actionlistener
 
+	//TODO: expand tree button listener
+
+	//TODO: collapse tree button listener
+	
+	//TODO: tree selection listener
+	
 	/**
 	 * This method displays an error message in a pop-up window.
 	 * 
