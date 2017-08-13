@@ -322,6 +322,7 @@ class World extends Thing {
 		if (md == null) // if no parent discard
 			return;
 		md.persons.add(ms); // add Person to parent SeaPort's persons roster
+		md.addSkills(ms.skill); // add the Person's skills to the SeaPort's skill roster
 	} // end method assignDock
 
 	/**

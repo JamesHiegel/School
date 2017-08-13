@@ -44,12 +44,10 @@ class SeaPort extends Thing {
 		return skills;
 	} // end method getSkills
 
-	public void addSkills(ArrayList<String> newSkills) {
-		// iterates through provided array
-		for (String ns : newSkills)
-			// adds skill if it is not already in the array
-			if (!skills.contains(ns))
-				skills.add(ns);
+	public void addSkills(String ns) {
+		// adds skill if it is not already in the array
+		if (!skills.contains(ns))
+			skills.add(ns);
 	} // end method setSkills
 
 	@Override
@@ -66,6 +64,9 @@ class SeaPort extends Thing {
 		st += "\n\n --- List of all persons:";
 		for (Person mp : persons)
 			st += "\n   > " + mp;
+		st += "\n\n --- List of all skills:";
+		for (String sk : skills)
+			st += "\n   > " + sk;
 		return st;
 	} // end method toString
 
