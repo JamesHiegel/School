@@ -16,18 +16,17 @@ class World extends Thing {
 	// instance variables
 	private ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
 	private PortTime time = new PortTime();
-	
-	@SuppressWarnings("unused")
+
 	private JPanel jobStatusPane = new JPanel();
-	
+
 	// HashMap to hold all objects in the World
 	private HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
-	
+
 	// used for the JTree
 	private DefaultMutableTreeNode root = new DefaultMutableTreeNode("World");
 	@SuppressWarnings("unused")
-	private JTree tree; 
-	
+	private JTree tree;
+
 	// constructor
 	public World(JPanel jobStatusPane) {
 		this.jobStatusPane = jobStatusPane;
@@ -79,7 +78,7 @@ class World extends Thing {
 	 *            the String to be parsed into a Person.
 	 */
 	private void addJob(Scanner sc) {
-		Job jb = new Job(sc);
+		Job jb = new Job(jobStatusPane, sc);
 		hmThings.put(jb.getIndex(), jb);
 		assignJob(jb);
 		// add to tree
@@ -89,7 +88,7 @@ class World extends Thing {
 		} else if (getDockByIndex(jb.getParent()) != null) {
 			node = getParentNode(getDockByIndex(jb.getParent()).getName());
 		}
-		node.add(new DefaultMutableTreeNode(jb.getName()));
+		node.add(new DefaultMutableTreeNode(jb.toString()));
 	} // end method addPerson
 
 	/**
