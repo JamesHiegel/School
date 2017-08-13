@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,6 +22,12 @@ public class SeaPortProgramModel {
 	// instance variables
 	private FileFilter filter = new FileNameExtensionFilter("Text File", "txt");
 	private World world = null;
+	private JPanel jobStatusPane = new JPanel();
+
+	// constructor
+	public SeaPortProgramModel(JPanel jobStatusPane) {
+		this.jobStatusPane = jobStatusPane;
+	}
 
 	// methods
 	/**
@@ -31,7 +38,7 @@ public class SeaPortProgramModel {
 	 * JFileChooser.
 	 */
 	public void loadFile() throws FileNotFoundException {
-		world = new World();
+		world = new World(jobStatusPane);
 		JFileChooser fc = new JFileChooser(".");
 		Scanner sc = null;
 		String st = "";
