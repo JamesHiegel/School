@@ -5,19 +5,21 @@ import java.util.Scanner;
 
 class SeaPort extends Thing {
 	// instance variables
-	protected ArrayList<Dock> docks = new ArrayList<Dock>();
+	private ArrayList<Dock> docks = new ArrayList<Dock>();
 	// list of ships waiting to dock
-	protected ArrayList<Ship> que = new ArrayList<Ship>();
+	private ArrayList<Ship> que = new ArrayList<Ship>();
 	// list of all ships at this port
-	protected ArrayList<Ship> ships = new ArrayList<Ship>();
+	private ArrayList<Ship> ships = new ArrayList<Ship>();
 	// list of people with skills at this port
-	protected ArrayList<Person> persons = new ArrayList<Person>();
+	private ArrayList<Person> persons = new ArrayList<Person>();
+	// list of skills at this port
+	private ArrayList<String> skills = new ArrayList<String>();
 
 	// constructors
 	public SeaPort() {
 		super();
 	} // end default constructor
-	
+
 	public SeaPort(Scanner sc) {
 		super(sc);
 	} // end Scanner constructor
@@ -37,6 +39,18 @@ class SeaPort extends Thing {
 	public ArrayList<Person> getPersons() {
 		return persons;
 	} // end method getPersons
+
+	public ArrayList<String> getSkills() {
+		return skills;
+	} // end method getSkills
+
+	public void addSkills(ArrayList<String> newSkills) {
+		// iterates through provided array
+		for (String ns : newSkills)
+			// adds skill if it is not already in the array
+			if (!skills.contains(ns))
+				skills.add(ns);
+	} // end method setSkills
 
 	@Override
 	public String toString() {
