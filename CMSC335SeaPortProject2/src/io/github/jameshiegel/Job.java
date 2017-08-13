@@ -3,6 +3,7 @@ package io.github.jameshiegel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 //File: Job.java
@@ -14,25 +15,28 @@ import javax.swing.JProgressBar;
  * to complete.
  */
 
+//job    name index parent duration [skill]+ (one or more, matches skill in person, may repeat)
+//job    <string> <int> <int> <double> [<string>]+
+
 public class Job extends Thing implements Runnable {
 	// instance variables
-	protected double duration = 0.0;
-	protected ArrayList<String> requirements = new ArrayList<String>();
-	private JProgressBar bar;
-	private Thread thread = new Thread();
-
+	private double duration = 0.0;
+	private ArrayList<String> requirements = new ArrayList<String>();
+	
+	private JPanel jobStatusPane;
+	private JProgressBar jobBar = new JProgressBar();
+	private enum Status {RUNNING, WAITING, COMPLETE, MISSING_SKILLS}
+	private Status status = Status.WAITING;
+	
 	// constructor
-	public Job() {
-		super();
-	} // end default constructor
-
-	public Job(Scanner sc) {
+	public Job(JPanel jobStatusPane, Scanner sc) {
 		super(sc);
 		if (sc.hasNextDouble())
 			duration = sc.nextDouble();
 		while (sc.hasNext())
 			requirements.add(sc.next());
-	} // end Scanner constructor
+		this.jobStatusPane = jobStatusPane;
+	} // end constructor
 
 	// methods
 	public double getDuration() {
@@ -43,14 +47,6 @@ public class Job extends Thing implements Runnable {
 		return requirements;
 	} // end method getRequirements
 
-	public void setThread(Thread thread) {
-		this.thread = thread;
-	} // end method setThread
-
-	public void setBar(JProgressBar bar) {
-		this.bar = bar;
-	} // end method setBar
-
 	@Override
 	public String toString() {
 		return requirements.toString();
@@ -58,20 +54,7 @@ public class Job extends Thing implements Runnable {
 
 	@Override
 	public void run() {
-		int sleepTime = 30;
-		try {
-			if (thread.isAlive())
-				thread.join(); // Will wait on passes thread
-			bar.setString(null); // Removes static text to allow % displayed
-			for (int i = 0; i <= 100; i++) {
-				Thread.sleep(sleepTime);
-				bar.setValue(i);
-			}
-		} catch (InterruptedException e) {
-			bar.setString("Interrupted");
-			return;
-		}
-		bar.setString("Finished");
-	} // end method run
+		// TODO Auto-generated method stub
+	}
 
 }// end class Job
