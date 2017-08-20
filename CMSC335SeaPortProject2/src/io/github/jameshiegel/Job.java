@@ -98,37 +98,34 @@ public class Job extends Thing implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			System.out.printf("Job %s Started\n", name);
+		System.out.printf("Job %s Started\n", name);
 
-			long time = System.currentTimeMillis();
-			long startTime = time;
-			long stopTime = (long) (time + 1000 * duration);
+		long time = System.currentTimeMillis();
+		long startTime = time;
+		long stopTime = (long) (time + 1000 * duration);
 
-			if (hmThings.get(parent) instanceof Ship) { // is parent a ship?
-				System.out.println("parent is a ship");
-				Ship ship = (Ship) hmThings.get(parent);
-				if (hmThings.get(ship.parent) instanceof Dock) { // docked?
-					System.out.println("ship is docked");
-					Dock dock = (Dock) hmThings.get(ship.parent);
-					SeaPort port = (SeaPort) hmThings.get(dock.parent);
-					// System.out.println(checkSkills(port));
-					// if the port does not have the skills
-					if (!checkSkills(port)) {
-						status = Status.MISSING_SKILLS;
-						showStatus(status);
-					} // end if block
-				} else if (hmThings.get(ship.parent) instanceof SeaPort) { // que?
-					SeaPort port = (SeaPort) hmThings.get(ship.parent);
-					System.out.println("ship is queued");
-				} // end if-else-if block
-			} else if (hmThings.get(parent) instanceof Dock) { // or a dock?
-				System.out.println("parent is a dock");
-				Dock dock = (Dock) hmThings.get(parent);
+		if (hmThings.get(parent) instanceof Ship) { // is parent a ship?
+			System.out.println("parent is a ship");
+			Ship ship = (Ship) hmThings.get(parent);
+			if (hmThings.get(ship.parent) instanceof Dock) { // docked?
+				System.out.println("ship is docked");
+				Dock dock = (Dock) hmThings.get(ship.parent);
 				SeaPort port = (SeaPort) hmThings.get(dock.parent);
+				// System.out.println(checkSkills(port));
+				// if the port does not have the skills
+				if (!checkSkills(port)) {
+					status = Status.MISSING_SKILLS;
+					showStatus(status);
+				} // end if block
+			} else if (hmThings.get(ship.parent) instanceof SeaPort) { // que?
+				SeaPort port = (SeaPort) hmThings.get(ship.parent);
+				System.out.println("ship is queued");
 			} // end if-else-if block
-		} catch (InterruptedException e) {
-		} // end try-catch block
+		} else if (hmThings.get(parent) instanceof Dock) { // or a dock?
+			System.out.println("parent is a dock");
+			Dock dock = (Dock) hmThings.get(parent);
+			SeaPort port = (SeaPort) hmThings.get(dock.parent);
+		} // end if-else-if block
 	} // end method run
 
 	public boolean checkSkills(SeaPort port) {
