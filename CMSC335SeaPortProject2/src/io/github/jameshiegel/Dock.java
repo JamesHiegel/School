@@ -20,11 +20,16 @@ public class Dock extends Thing {
 	public Dock(Scanner sc) {
 		super(sc);
 	} // end Scanner constructor
-	
+
 	// methods
 	public Ship getShip() {
 		return ship;
 	} // end method getShip
+
+	public String getName() {
+		String st = "\n  Dock: " + super.toString();
+		return st;
+	} // end method getName
 
 	@Override
 	public String toString() {
@@ -32,5 +37,5 @@ public class Dock extends Thing {
 		st += "\n    Ship: " + ship.toString();
 		return st;
 	} // end method toString
-	
+
 } // end class Dock

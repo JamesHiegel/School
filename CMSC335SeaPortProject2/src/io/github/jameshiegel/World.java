@@ -17,7 +17,7 @@ class World extends Thing {
 	private ArrayList<SeaPort> ports = new ArrayList<SeaPort>();
 	private PortTime time = new PortTime();
 
-	private JPanel jobStatusPane = new JPanel();
+	private JPanel jobStatusPane = null;
 
 	// HashMap to hold all objects in the World
 	private HashMap<Integer, Thing> hmThings = new HashMap<Integer, Thing>();
@@ -30,6 +30,7 @@ class World extends Thing {
 	// constructor
 	public World(JPanel jobStatusPane) {
 		this.jobStatusPane = jobStatusPane;
+		jobStatusPane.removeAll();
 	}
 
 	// methods
@@ -78,7 +79,7 @@ class World extends Thing {
 	 *            the String to be parsed into a Person.
 	 */
 	private void addJob(Scanner sc) {
-		Job jb = new Job(jobStatusPane, sc);
+		Job jb = new Job(hmThings, jobStatusPane, sc);
 		hmThings.put(jb.getIndex(), jb);
 		assignJob(jb);
 		// add to tree
@@ -199,7 +200,7 @@ class World extends Thing {
 	 *            the index to find.
 	 * @return the SeaPort with the specified index value
 	 */
-	SeaPort getSeaPortByIndex(int x) {
+	public SeaPort getSeaPortByIndex(int x) {
 		// for (SeaPort msp : ports)
 		// if (msp.index == x)
 		// return msp;
@@ -217,7 +218,7 @@ class World extends Thing {
 	 *            the index to find.
 	 * @return the Dock with the specified index value
 	 */
-	Dock getDockByIndex(int x) {
+	public Dock getDockByIndex(int x) {
 		// for (SeaPort msp : ports)
 		// for (Dock dk : msp.docks)
 		// if (dk.index == x)
@@ -236,7 +237,7 @@ class World extends Thing {
 	 *            the index to find.
 	 * @return the Ship with the specified index value
 	 */
-	Ship getShipByIndex(int x) {
+	public Ship getShipByIndex(int x) {
 		// for (SeaPort msp : ports)
 		// for (Ship ms : msp.ships)
 		// if (ms.index == x)
@@ -255,7 +256,7 @@ class World extends Thing {
 	 *            the index to find.
 	 * @return the Person with the specified index value
 	 */
-	Person getPersonByIndex(int x) {
+	public Person getPersonByIndex(int x) {
 		// for (SeaPort msp : ports)
 		// for (Person ps : msp.persons)
 		// if (ps.index == x)
@@ -272,7 +273,7 @@ class World extends Thing {
 	 * @param jb
 	 *            the Job to be assigned.
 	 */
-	void assignJob(Job jb) {
+	private void assignJob(Job jb) {
 		Ship md = getShipByIndex(jb.parent);
 		if (md == null)
 			return;
@@ -285,7 +286,7 @@ class World extends Thing {
 	 * @param ms
 	 *            the Dock to be assigned.
 	 */
-	void assignDock(Dock ms) {
+	private void assignDock(Dock ms) {
 		SeaPort md = getSeaPortByIndex(ms.parent);
 		if (md == null)
 			return;
@@ -299,7 +300,7 @@ class World extends Thing {
 	 * @param ms
 	 *            the Ship to be assigned.
 	 */
-	void assignShip(Ship ms) {
+	private void assignShip(Ship ms) {
 		Dock md = getDockByIndex(ms.parent); // gets parent index
 		if (md == null) { // adds ship to SeaPort que if not assigned a Dock
 			getSeaPortByIndex(ms.parent).que.add(ms);
@@ -316,7 +317,7 @@ class World extends Thing {
 	 * @param ms
 	 *            the Person to be assigned.
 	 */
-	void assignPerson(Person ms) {
+	private void assignPerson(Person ms) {
 		SeaPort md = getSeaPortByIndex(ms.parent); // gets parent index
 		if (md == null) // if no parent discard
 			return;

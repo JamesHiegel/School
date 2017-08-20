@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -83,19 +84,19 @@ public class SeaPortProgramView extends JFrame {
 		pane.add(topPanel, BorderLayout.PAGE_START);
 
 		// creates middle panel and uses GridLayout to keep both sides equal
-		JPanel midPanel = new JPanel(new GridLayout(1, 2));
+//		JPanel midPanel = new JPanel(new GridLayout(1, 2));
 
 		// left middle panel
 		// makes textView scrollable, ensures it fills the viewport
 		JScrollPane textJSP = new JScrollPane(textView);
 		textView.setEditable(false);
 		leftPanel.addTab("Text View", textJSP);
-
 		leftPanel.addTab("Tree View", treeJSP);
 		// add leftPanel to midPanel
-		midPanel.add(leftPanel);
+//		midPanel.add(leftPanel);
 
 		// right middle panel
+		jobStatus.setLayout(new GridLayout(0,1));
 		// makes jobStatus scrollable and adds it to the rightPanel
 		JScrollPane jobJSP = new JScrollPane(jobStatus);
 		rightPanel.addTab("Job Status", jobJSP);
@@ -109,8 +110,12 @@ public class SeaPortProgramView extends JFrame {
 		rightPanel.addTab("Search Results", resultsJSP);
 
 		// add rightPanel to midPanel
-		midPanel.add(rightPanel);
+//		midPanel.add(rightPanel);
 
+		// Create a split pane with the two scroll panes in it.
+		JSplitPane midPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
+		midPanel.setResizeWeight(0.5);
+		
 		// add midPanel to master panel
 		pane.add(midPanel, BorderLayout.CENTER);
 
@@ -126,7 +131,6 @@ public class SeaPortProgramView extends JFrame {
 		pack();
 		// centers GUI on the screen
 		setLocationRelativeTo(null);
-
 	} // end method initGUI
 
 	/**
@@ -230,12 +234,12 @@ public class SeaPortProgramView extends JFrame {
 		sortBtn.addActionListener(listenForButton);
 	} // end searchBtn actionlistener
 
-	//TODO: expand tree button listener
+	// TODO: expand tree button listener
 
-	//TODO: collapse tree button listener
-	
-	//TODO: tree selection listener
-	
+	// TODO: collapse tree button listener
+
+	// TODO: tree selection listener
+
 	/**
 	 * This method displays an error message in a pop-up window.
 	 * 
@@ -259,11 +263,15 @@ public class SeaPortProgramView extends JFrame {
 	/**
 	 * Returns the JPanel that will hold Jobs from the GUI.
 	 * 
-	 * @return jobStatus
-	 *            the JPanel for displaying Jobs.
+	 * @return jobStatus the JPanel for displaying Jobs.
 	 */
 	public JPanel getJobStatusPane() {
 		return jobStatus;
 	} // end method setTreeView
-	
+
+	public void refreshJobs() {
+		rightPanel.setSelectedIndex(1);
+		rightPanel.setSelectedIndex(0);
+	}
+
 } // end class SeaPortProgramView

@@ -45,6 +45,7 @@ public class SeaPortProgramController {
 				theView.setTextView(theModel.getWorld());
 				// passes the JTree from the model to the GUI to display data
 				theView.setTreeView(theModel.getTree());
+				theView.refreshJobs();
 			} catch (FileNotFoundException e1) {
 				theView.displayErrorMessage("File not found!");
 			}
