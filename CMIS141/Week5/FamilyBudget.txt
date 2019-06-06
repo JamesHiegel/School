@@ -1,0 +1,7 @@
+/*
+* File: FamilyBudget.java
+* Author: James Hiegel
+* Date: 22 November 2015
+* Purpose: This program demonstrates the creation
+* and use of Java arrays
+*/
